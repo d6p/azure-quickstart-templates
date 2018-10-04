@@ -14,7 +14,6 @@
 				"description": "os type"
 			},
 			"defaultValue": "windows"
-			
 		},
 		"capassword": {
 			"type": "securestring",
@@ -33,13 +32,13 @@
 				"no"
 			]
 		},
-		"safekitFileUri":{
-			"type","string",
-			"metadata":{
-				"description":"url of safekit package"
+		"safekitFileUri": {
+			"type": "string",
+			"metadata": {
+				"description": "url of safekit package"
 			},
-			"defaultValue":""
-		},		
+			"defaultValue": ""
+		},
 		"location": {
 			"type": "string",
 			"metadata": {
