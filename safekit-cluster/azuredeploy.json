@@ -608,7 +608,7 @@
 		},
 		"Mosaic URL": {
 			"type": "string",
-			"value": "[concat('https://',reference(resourceId(resourceGroup().name,'Microsoft.Network/publicIPAddresses/',concat('pip',parameters('VIPDnsLabel')))).dnsSettings.fqdn,':9453/mosaic?mode=mosaic&arg0=',parameters('moduleName'))]"
+			"value": "[concat('https://',reference(resourceId(resourceGroup().name,'Microsoft.Network/publicIPAddresses/',concat('pip',parameters('VIPDnsLabel'))),'2018-07-01').dnsSettings.fqdn,':9453/mosaic?mode=mosaic&arg0=',parameters('moduleName'))]"
 		}
 	}
 }
