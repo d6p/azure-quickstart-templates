@@ -501,7 +501,7 @@
 			"name": "[concat('safekitInstall',copyIndex())]",
 			"copy": {
 				"name": "skCopy",
-				"count": "[(length(variables('vms'))]"
+				"count": "[length(variables('vms'))]"
 			},
 			"dependsOn": [
 				"[variables('vms')[copyIndex()]]"
