@@ -565,7 +565,7 @@
 						"value": "[variables('ips')]"
 					},
 					"lblist": {
-						"value": "[if(greater(length(parameters('VIPDnsLabel')),0),reference(resourceId(resourceGroup().name,'Microsoft.Network/publicIPAddresses/',concat('pip',parameters('VIPDnsLabel')))).dnsSettings.fqdn,'')]"
+						"value": "[if(greater(length(parameters('VIPDnsLabel')),0),reference('optionalVip').outputs.fqdn.value,'')]"
 					},
 					"capassword": {
 						"value": "[parameters('AdminPassword')]"
