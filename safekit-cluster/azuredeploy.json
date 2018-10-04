@@ -141,6 +141,7 @@
 		],
 		"sktemplate": "[concat(uri(parameters('_artifactsLocation'), 'nestedtemplates/safekitdepl.json'),parameters('_artifactsLocationSasToken'))]",
 		"skclustertemplate": "[concat(uri(parameters('_artifactsLocation'), 'nestedtemplates/installCluster.json'),parameters('_artifactsLocationSasToken'))]",
+		"createviptemplate": "[concat(uri(parameters('_artifactsLocation'),'nestedtemplates/createvip.json'),parameters('_artifactsLocationSasToken'))]",
 		"NSGName": "[concat(uniquestring(resourceGroup().id,parameters('location')),'-NSG')]",
 		"storageAccountName": "[concat(uniquestring(resourceGroup().id,parameters('location')), 'stor')]",
 		"lbPoolID": "[if(equals(parameters('LoadBalancer'),'none'),'',resourceId('Microsoft.Network/loadBalancers/backendAddressPools',variables('lbName'),variables('lbPoolName')))]",
@@ -214,27 +215,17 @@
 			"name": "optionalVip",
 			"properties": {
 				"mode": "Incremental",
-				"template": {
-					"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-					"contentVersion": "1.0.0.0",
-					"resources": [
-						{
-							"condition": "[not(empty(parameters('VIPDnsLabel')))]",
-							"type": "Microsoft.Network/publicIPAddresses",
-							"apiVersion": "2018-07-01",
-							"name": "[concat('pip',parameters('VIPDnsLabel'))]",
-							"location": "[parameters('location')]",
-							"sku": {
-								"name": "Standard"
-							},
-							"properties": {
-								"publicIPAllocationMethod": "Static",
-								"dnsSettings": {
-									"domainNameLabel": "[toLower(parameters('VIPDnsLabel'))]"
-								}
-							}
-						}
-					]
+				"templateLink": {
+					"uri": "[variables('skclustertemplate')]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"location": {
+						"value": "[parameters('location')]"
+					},
+					"VIPDnsLabel": {
+						"value": "[parameters('VIPDnsLabel')]"
+					}
 				}
 			}
 		},
@@ -608,7 +599,7 @@
 		},
 		"Mosaic URL": {
 			"type": "string",
-			"value": "[concat('https://',reference(resourceId(resourceGroup().name,'Microsoft.Network/publicIPAddresses/',concat('pip',parameters('VIPDnsLabel'))),'2018-07-01').dnsSettings.fqdn,':9453/mosaic?mode=mosaic&arg0=',parameters('moduleName'))]"
+			"value": "[concat('https://',reference('optionalVip').fqdn.value,':9453/mosaic?mode=mosaic&arg0=',parameters('moduleName'))]"
 		}
 	}
 }
