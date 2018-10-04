@@ -411,7 +411,8 @@
 			},
 			"dependsOn": [
 				"[resourceId('Microsoft.Network/publicIPAddresses/',concat('pip',variables('vms')[copyIndex()]))]",
-				"[resourceId('Microsoft.Network/networkSecurityGroups/',variables('NSGName'))]"
+				"[resourceId('Microsoft.Network/networkSecurityGroups/',variables('NSGName'))]",
+				"[variables('virtualNetworkName')]"
 			],
 			"properties": {
 				"networkSecurityGroup": {
@@ -427,7 +428,7 @@
 								"id": "[resourceId('Microsoft.Network/publicIPAddresses/', concat('pip',variables('vms')[copyIndex()]))]"
 							},
 							"subnet": {
-								"id": "[reference(variables('vnettmpl')).outputs.subnetRef.value]"
+								"id": "[resourceId('Microsoft.Network/virtualNetworks/subnets',variables('virtualNetworkName'),'Subnet')]"
 							},
 							"loadBalancerBackendAddressPools": "[variables('lbaddrpool')]"
 						}
