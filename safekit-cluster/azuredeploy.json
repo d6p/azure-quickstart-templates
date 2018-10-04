@@ -124,7 +124,7 @@
 			"VM3",
 			"VM4"
 		],
-		"vms": "[take(variables('allvms',parameters('clusterNodes'))]",
+		"vms": "[take(variables('allvms'),parameters('clusterNodes'))]",
 		"cltemplate": "[uri(parameters('_artifactsLocation'),'nested/cluster.json')]",
 		"frontEndIPConfigName": "[concat(parameters('VIPDnsLabel'),'LBFE')]",
 		"lbPoolName": "[concat(parameters('VIPDnsLabel'),'BEP')]",
