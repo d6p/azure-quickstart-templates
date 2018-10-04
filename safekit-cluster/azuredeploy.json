@@ -152,7 +152,7 @@
 		"lbaddrpool0": [
 			
 		],
-		"lbaddrpool": "[if(greater(length(parameters('lbPoolID')),0),variables('lbaddrpool1'),variables('lbaddrpool0'))]",
+		"lbaddrpool": "[if(greater(length(variables('lbPoolID')),0),variables('lbaddrpool1'),variables('lbaddrpool0'))]",
 		"WindowsStorageProfile": {
 			"imageReference": {
 				"publisher": "MicrosoftWindowsServer",
