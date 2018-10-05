@@ -4,7 +4,7 @@ param(
 )
 
 
-$targetDir = ".."
+$targetDir = "."
 
 function Log {
 	param(
