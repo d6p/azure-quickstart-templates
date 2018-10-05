@@ -42,24 +42,27 @@ if ($vmlist){
 	}
     Log "configuring cluster.xml and certificates input files"
 
+	$str = "<cluster><lans>"
 	if($publicfmt){
-		$str="<cluster><lans><lan name='External' console='on' command='off' framework='off'>"
+		$str="<lan name='External' console='on' command='off' framework='off'>"
 	
 		for ($i=0; $i -lt $vmargs.Length; $i++){
 			$dnsname=$($publicipfmt).Replace('%VM%',$($vmargs[$i])).ToLower()
 			$str += "<node name='$($vmargs[$i])' addr='$dnsname'/>"
 			"`"$dnsname`"," | Out-File -Append -Encoding ASCII -FilePath "$safewebconf/ipnames.json"
 		}
+		
+		$str += "</lan>"
 	}
 	
 	for($i=0; $i -lt $lbargs.Length; $i++){
-		$dnsname = $lbargs[$i]
+		$dnsname = $($lbargs[$i])
 		if($dnsname.Length){
 			"`"$dnsname`"," | Out-File -Append -Encoding ASCII -FilePath "$safewebconf/ipnames.json"
 		}
 	}
 	"null]" | Out-File -Append -Encoding ASCII -FilePath "$safewebconf/ipnames.json"
-    $str += "</lan>"
+    
 	
 	$str+="<lan name='default' console='on' command='on' framework='on' >"
 	for ($i=0; $i -lt $vmargs.Length; $i++){
@@ -68,6 +71,7 @@ if ($vmlist){
 			$targets += $($privateipargs[$i])
 	}
 	"null]" | Out-File -Append -Encoding ASCII -FilePath "$safewebconf/ipv4.json"
+	
     $str += "</lan></lans></cluster>"
     $str | Out-File -Encoding utf8 $safevar\cluster\cluster.xml
 	& $safekitcmd cluster config 2>&1
