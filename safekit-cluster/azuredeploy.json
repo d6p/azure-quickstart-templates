@@ -216,7 +216,7 @@
 			"properties": {
 				"mode": "Incremental",
 				"templateLink": {
-					"uri": "[variables('skclustertemplate')]",
+					"uri": "[variables('createviptemplate')]",
 					"contentVersion": "1.0.0.0"
 				},
 				"parameters": {
