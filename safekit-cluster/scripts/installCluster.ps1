@@ -3,7 +3,7 @@ param(
 	[string] $privateiplist,
     [string] $vmlist,
 	[string] $lblist,
-	[string] $Passwd,
+	[string] $Passwd
 )
 
 $targetDir = "."
