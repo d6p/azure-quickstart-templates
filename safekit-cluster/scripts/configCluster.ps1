@@ -43,7 +43,7 @@ if ($vmlist){
     Log "configuring cluster.xml and certificates input files"
 
 	$str = "<cluster><lans>"
-	if($publicfmt){
+	if($publicipfmt){
 		$str="<lan name='External' console='on' command='off' framework='off'>"
 	
 		for ($i=0; $i -lt $vmargs.Length; $i++){
