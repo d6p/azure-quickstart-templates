@@ -3,9 +3,6 @@ param(
 	[string] $Passwd
 )
 
-
-$targetDir = "."
-
 function Log {
 	param(
 		[string] $m
@@ -20,7 +17,7 @@ Log $modname
 	
 if( ! (Test-Path -Path "/safekit" )) {
 
-if( ! (Test-Path -Path "$targetDir/$skFile" )){
+if( ! (Test-Path -Path "$skFile" )){
 
    Log "Download $SkFile failed. Check calling template fileUris property."
    exit -1
@@ -29,10 +26,10 @@ if( ! (Test-Path -Path "$targetDir/$skFile" )){
 Log "Installing ..."
 $arglist = @(
     "/i",
-    "$targetDir\$SkFile",
+    "$SkFile",
     "/qn",
     "/l*vx",
-    "$targetDir\loginst.txt",
+    "loginst.txt",
     "DODESKTOP='0'"
 )
 
