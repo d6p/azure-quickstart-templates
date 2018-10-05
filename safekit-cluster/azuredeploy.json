@@ -401,6 +401,7 @@
 				"count": "[length(variables('vms'))]"
 			},
 			"dependsOn": [
+				"optionalLB",
 				"[resourceId('Microsoft.Network/publicIPAddresses/',concat('pip',variables('vms')[copyIndex()]))]",
 				"[resourceId('Microsoft.Network/networkSecurityGroups/',variables('NSGName'))]",
 				"[variables('virtualNetworkName')]"
