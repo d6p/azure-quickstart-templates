@@ -600,7 +600,7 @@
 		},
 		"Mosaic URL": {
 			"type": "string",
-			"value": "[concat('https://',reference('optionalVip').fqdn.value,':9453/mosaic?mode=mosaic&arg0=',parameters('moduleName'))]"
+			"value": "[concat('https://',reference('optionalVip').outputs.fqdn.value,':9453/mosaic?mode=mosaic&arg0=',parameters('moduleName'))]"
 		}
 	}
 }
