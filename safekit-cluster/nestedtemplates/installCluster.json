@@ -95,7 +95,7 @@
 				"autoUpgradeMinorVersion": true,
 				"settings": {
 					"fileUris": "[if(equals(parameters('moduleUrl'),''),variables('windowsfileuris'),concat(variables('windowsfileuris'),array(parameters('moduleUrl'))))]",
-					"commandToExecute": "[concat('powershell -ExecutionPolicy Unrestricted -File  .\\InstallCluster.ps1 -vmlist \"', variables('vmlistarg'),'\" -publicipfmt \"',variables('publicipfmt'),'\" -privateiplist \"',variables('privateiplistarg'),'\" -lblist \",parameters('lblist'),'\" -Passwd \"',parameters('capassword'),'\"')]"
+					"commandToExecute": "[concat('powershell -ExecutionPolicy Unrestricted -File  .\\InstallCluster.ps1 -vmlist \"', variables('vmlistarg'),'\" -publicipfmt \"',variables('publicipfmt'),'\" -privateiplist \"',variables('privateiplistarg'),'\" -lblist \"',parameters('lblist'),'\" -Passwd \"',parameters('capassword'),'\"')]"
 				}
 			},
 			"linux": {
