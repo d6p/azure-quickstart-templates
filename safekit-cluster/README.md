@@ -21,6 +21,6 @@ After deployment, go to the output panel and
 + visit the credential url to get the client and CA certificates 
 + After certificates installation, use the "start" button to connect to the console
 
-Beware, work in progress ... :umbrella:
+Beware, work in progress ... :umbrella: :umbrella:
 
 
