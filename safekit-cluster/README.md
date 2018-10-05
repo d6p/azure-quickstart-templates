@@ -11,10 +11,10 @@ Each VM has a public IP address.
 + Optionally deploys a public VIP.
 + Optionally deploys a module. 
 + Optionally deploys an external loadbalancer with:
- +	the pubilc VIP as frontend IP
- +	All the VMs in its backend pool.
- +  A health probe to check the optional module state
- +  A loadbalancing rule for external port 443, internal port 9453 to access the test url ('mosaic')
+  +	the pubilc VIP as frontend IP
+  +	All the VMs in its backend pool.
+  + A health probe to check the optional module state
+  + A loadbalancing rule for external port 443, internal port 9453 to access the test url ('mosaic')
 
 ## How to use
 After deployment, go to the output panel and
