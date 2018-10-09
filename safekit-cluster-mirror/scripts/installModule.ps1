@@ -26,5 +26,6 @@ if($module.Length){
 				& ./$modulecfgscript
 			}
             & $safekitcmd -H "*" -E $modulename
-        } 
+        }
+	}
 } 
