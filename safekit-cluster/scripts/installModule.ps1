@@ -1,26 +1,30 @@
 param(
 	[string]$safekitcmd,
-	[string]$MName
+	[string]$MName,
+	[string]$modulepkg,
+	[string]$modulecfgscript
 )
 
-$module = [array] (ls "*.safe")
-$idx=1
-$module | %{
+if( $modulepkg ){
+    $module = $modulepkg.Split(',') 
+}
+else{
+    $module = [array] (ls "*.safe")
+}
+
+if($module.Length){ 
+	$module[0] | %{
         if($_){
-			if($MName -and (length($MName) -gt 0)) {
-				if($idx -eq 1){
-					$modulename=$MName
-				}
-				else{
-					$modulename="$MName$idx"
-				}
-				$idx = $idx + 1
-				
+			if($MName -and ($($MName.Length) -gt 0)) {
+				$modulename=$MName
 			}else{
 				$modulename = $($_.name.Replace(".safe",""))
 			}
             
             & $safekitcmd module install -m $modulename $_
+			if($modulecfgscript -and (Test-Path  "./$modulecfgscript")){
+				& ./$modulecfgscript
+			}
             & $safekitcmd -H "*" -E $modulename
         } 
 } 
