@@ -142,6 +142,7 @@
 		"sktemplate": "[concat(uri(parameters('_artifactsLocation'), 'nestedtemplates/safekitdepl.json'),parameters('_artifactsLocationSasToken'))]",
 		"skclustertemplate": "[concat(uri(parameters('_artifactsLocation'), 'nestedtemplates/installCluster.json'),parameters('_artifactsLocationSasToken'))]",
 		"createviptemplate": "[concat(uri(parameters('_artifactsLocation'),'nestedtemplates/createvip.json'),parameters('_artifactsLocationSasToken'))]",
+		"skmoduletemplate":"[concat(uri(parameters('_artifactsLocation'),'nestedtemplates/installModule.json'),parameters('_artifactsLocationSasToken'))]",
 		"NSGName": "[concat(uniquestring(resourceGroup().id,parameters('location')),'-NSG')]",
 		"storageAccountName": "[concat(uniquestring(resourceGroup().id,parameters('location')), 'stor')]",
 		"lbPoolID": "[if(equals(parameters('LoadBalancer'),'none'),'',resourceId('Microsoft.Network/loadBalancers/backendAddressPools',variables('lbName'),variables('lbPoolName')))]",
@@ -491,7 +492,7 @@
 		{
 			"type": "Microsoft.Resources/deployments",
 			"apiVersion": "2018-05-01",
-			"name": "[concat('safekitInstall',copyIndex())]",
+			"name": "[concat('safekitInstall',variables('vms)[copyIndex()])]",
 			"copy": {
 				"name": "skCopy",
 				"count": "[length(variables('vms'))]"
@@ -579,7 +580,46 @@
 					}
 				}
 			}
-		}
+		},
+		{
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-05-01",
+			"name": "safekitModuleConfig",
+			"dependsOn": [
+				"safekitClusterConfig"
+			],
+			"properties": {
+				"mode": "Incremental",
+				"templateLink": {
+					"uri": "[variables('skmoduletemplate')]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"location": {
+						"value": "[parameters('location')]"
+					},
+					"ostype": {
+						"value": "[variables('ostype')]"
+					},
+					"vmname": {
+						"value": "[variables('vms')[0]]"
+					},
+					"moduleUrl": {
+						"value": "[parameters('moduleUrl')]"
+					},
+					"moduleName": {
+						"value": "[parameters('moduleName')]"
+					},
+					"_artifactsLocation": {
+						"value": "[parameters('_artifactsLocation')]"
+					},
+					"_artifactsLocationSasToken": {
+						"value": "[parameters('_artifactsLocationSasToken')]"
+					}
+				}
+			}
+		},
+		
 	],
 	"outputs": {
 		"adminUser": {

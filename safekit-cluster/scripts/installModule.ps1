@@ -3,7 +3,7 @@ param(
 	[string]$MName
 )
 
-$module = [array] (ls "../*.safe")
+$module = [array] (ls "*.safe")
 $idx=1
 $module | %{
         if($_){
