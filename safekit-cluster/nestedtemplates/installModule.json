@@ -79,7 +79,7 @@
 					"[parameters('moduleUrl')]",
 					"[variables('installModuleuri')]"
 				],
-				"commandToExecute": "[concat('pwsh ./installModule.ps1 -safekitcmd /opt/safekit/safekit' -MName \"',parameters('moduleName'),'\"')]"
+				"commandToExecute": "[concat('pwsh ./installModule.ps1 -safekitcmd /opt/safekit/safekit -MName' \"',parameters('moduleName'),'\"')]"
 			}
 		}
 	}
