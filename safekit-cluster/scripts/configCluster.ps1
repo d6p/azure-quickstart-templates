@@ -44,7 +44,7 @@ if ($vmlist){
 
 	$str = "<cluster><lans>"
 	if($publicipfmt){
-		$str="<lan name='External' console='on' command='off' framework='off'>"
+		$str +="<lan name='External' console='on' command='off' framework='off'>"
 	
 		for ($i=0; $i -lt $vmargs.Length; $i++){
 			$dnsname=$($publicipfmt).Replace('%VM%',$($vmargs[$i])).ToLower()
@@ -64,7 +64,7 @@ if ($vmlist){
 	"null]" | Out-File -Append -Encoding ASCII -FilePath "$safewebconf/ipnames.json"
     
 	
-	$str+="<lan name='default' console='on' command='on' framework='on' >"
+	$str +="<lan name='default' console='on' command='on' framework='on' >"
 	for ($i=0; $i -lt $vmargs.Length; $i++){
 			$str += "<node name='$($vmargs[$i])' addr='$($privateipargs[$i])'/>"
 			"`"$($privateipargs[$i])`"," | Out-File -Append -Encoding ASCII -FilePath "$safewebconf/ipv4.json"
