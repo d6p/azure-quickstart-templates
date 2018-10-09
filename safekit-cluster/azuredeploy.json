@@ -492,7 +492,7 @@
 		{
 			"type": "Microsoft.Resources/deployments",
 			"apiVersion": "2018-05-01",
-			"name": "[concat('safekitInstall',variables('vms)[copyIndex()])]",
+			"name": "[concat('safekitInstall',variables('vms')[copyIndex()])]",
 			"copy": {
 				"name": "skCopy",
 				"count": "[length(variables('vms'))]"
