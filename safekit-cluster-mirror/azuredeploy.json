@@ -142,7 +142,7 @@
 		"sktemplate": "[concat(uri(parameters('_artifactsLocation'), 'nestedtemplates/safekitdepl.json'),parameters('_artifactsLocationSasToken'))]",
 		"skclustertemplate": "[concat(uri(parameters('_artifactsLocation'), 'nestedtemplates/installCluster.json'),parameters('_artifactsLocationSasToken'))]",
 		"createviptemplate": "[concat(uri(parameters('_artifactsLocation'),'nestedtemplates/createvip.json'),parameters('_artifactsLocationSasToken'))]",
-		"skmoduletemplate":"[concat(uri(parameters('_artifactsLocation'),'nestedtemplates/installModule.json'),parameters('_artifactsLocationSasToken'))]",
+		"skmoduletemplate": "[concat(uri(parameters('_artifactsLocation'),'nestedtemplates/installModule.json'),parameters('_artifactsLocationSasToken'))]",
 		"NSGName": "[concat(uniquestring(resourceGroup().id,parameters('location')),'-NSG')]",
 		"storageAccountName": "[concat(uniquestring(resourceGroup().id,parameters('location')), 'stor')]",
 		"lbPoolID": "[if(equals(parameters('LoadBalancer'),'none'),'',resourceId('Microsoft.Network/loadBalancers/backendAddressPools',variables('lbName'),variables('lbPoolName')))]",
@@ -279,7 +279,7 @@
 												"id": "[resourceId('Microsoft.Network/loadBalancers/backendAddressPools',variables('lbName'),variables('lbPoolName'))]"
 											},
 											"protocol": "tcp",
-											"frontendPort": 443,
+											"frontendPort": 9453,
 											"backendPort": 9453,
 											"enableFloatingIP": false,
 											"idleTimeoutInMinutes": 5,
@@ -618,7 +618,7 @@
 					}
 				}
 			}
-		},
+		}
 		
 	],
 	"outputs": {
@@ -630,17 +630,21 @@
 			"type": "string",
 			"value": "[reference(resourceId(resourceGroup().name,'Microsoft.Network/publicIPAddresses/',concat('pip',variables('vms')[0]))).dnsSettings.fqdn]"
 		},
-		"AdminUrl": {
+		"Credentials Url": {
 			"type": "string",
 			"value": "[concat('https://',reference(resourceId(resourceGroup().name,'Microsoft.Network/publicIPAddresses/',concat('pip',variables('vms')[0]))).dnsSettings.fqdn,':9001/adduser.html')]"
 		},
-		"AdminUrl Login": {
+		"Credentials Url Login": {
 			"type": "string",
 			"value": "user: CA_admin, password: the value of AdminPassword"
 		},
+		"Console Url": {
+			"type": "string",
+			"value": "[concat('https://',reference(resourceId(resourceGroup().name,'Microsoft.Network/publicIPAddresses/',concat('pip',variables('vms')[0]))).dnsSettings.fqdn,':9453/deploy.html')]"
+		},
 		"Mosaic URL": {
 			"type": "string",
-			"value": "[concat('https://',reference('optionalVip').outputs.fqdn.value,':9453/mosaic?mode=mosaic&arg0=',parameters('moduleName'))]"
+			"value": "[concat('https://',reference('optionalVip').outputs.fqdn.value,':9453/cgi-bin/mosaic?mode=mosaic&arg0=',parameters('moduleName'))]"
 		}
 	}
 }
