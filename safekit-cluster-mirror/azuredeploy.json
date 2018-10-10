@@ -115,7 +115,7 @@
 						"value": "[variables('clusterNodes')]"
 					},
 					"vmSize": {
-						"value": "[parameters('vmSize')"
+						"value": "[parameters('vmSize')]"
 					},
 					"adminUser": {
 						"value": "[parameters('adminUser')]"
