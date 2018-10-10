@@ -5,7 +5,7 @@
 </a>
 
 ## Description
-This template deploys 2 vms (windows or linux) with SafeKit (see <a href="www.evidian.com/safekit">this page</a> for more information) installed and configured to include all the VMS in a cluster.
+This template deploys 2 vms (windows or linux) with SafeKit (see <a href="https://www.evidian.com/safekit">this page</a> for more information) installed and configured to include all the VMS in a cluster.
 Each VM has a public IP address.
 
 + a public VIP associated with a public loadbalancer is deployed.
