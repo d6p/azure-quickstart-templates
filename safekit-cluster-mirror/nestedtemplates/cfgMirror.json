@@ -68,8 +68,7 @@
 					"skipDos2Unix": false,
 					"timestamp": 1,
 					"fileUris": [
-						"[parameters('moduleUrl')]",
-						"[variables('installModuleuri')]"
+						"[variables('cfgModuleuri')]"
 					],
 					"commandToExecute": "[concat('pwsh ./cfgMirror.ps1 -safekitcmd /opt/safekit/safekit -safekitmod /opt/safekit/modules -MName \"',parameters('moduleName'),'\"')]"
 				}
