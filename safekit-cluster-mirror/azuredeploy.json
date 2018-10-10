@@ -35,20 +35,9 @@
 		"VIPDnsLabel": {
 			"type": "string",
 			"metadata": {
-				"description": "Public VIP dns label (optional. If set, an additionnal Standard SKU, unassociated public IP will be created)"
+				"description": "Public VIP dns label."
 			},
 			"defaultValue": "[concat(resourceGroup().name,'vip')]"
-		},
-		"Loadbalancer": {
-			"type": "string",
-			"metadata": {
-				"description": "loadbalancer (optional. If set, a loadbalancer will be created, with the VIP as frontend and the VMs in the backend pool."
-			},
-			"defaultValue": "External",
-			"allowedValues": [
-				"External",
-				"none"
-			]
 		},
 		"azurePwsh": {
 			"type": "string",
@@ -71,7 +60,7 @@
 		"safekitFileUri": {
 			"type": "string",
 			"metadata": {
-				"description": "url of safekit package"
+				"description": "url of SafeKit package (optional, if not set the appropriate Evidian website url is used)."
 			},
 			"defaultValue": ""
 		},
