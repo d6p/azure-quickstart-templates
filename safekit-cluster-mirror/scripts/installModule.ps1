@@ -9,7 +9,7 @@ if( $modulepkg ){
     $module = $modulepkg.Split(',') 
 }
 else{
-    $module = [array] (ls "*.safe")
+    $module = [array] (ls *.safe)
 }
 
 if($module.Length){ 
@@ -26,5 +26,6 @@ if($module.Length){
 				& ./$modulecfgscript
 			}
             & $safekitcmd -H "*" -E $modulename
-        } 
+        }
+	}
 } 
