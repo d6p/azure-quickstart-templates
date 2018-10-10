@@ -132,7 +132,7 @@
 					"VIPDnsLabel": {
 						"value": "[parameters('VIPDnsLabel')]"
 					},
-					"Loadlancer": {
+					"Loadbalancer": {
 						"value": "External"
 					},
 					"location": {
