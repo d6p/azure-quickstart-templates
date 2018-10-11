@@ -60,9 +60,9 @@
 		"safekitFileUri": {
 			"type": "string",
 			"metadata": {
-				"description": "url of SafeKit package (optional, if not set the appropriate Evidian website url is used)."
+				"description": "url of SafeKit package (optional, default to the appropriate Evidian website url)."
 			},
-			"defaultValue": ""
+			"defaultValue": "default"
 		},
 		"_artifactsLocation": {
 			"type": "string",
@@ -139,7 +139,7 @@
 						"value": "[parameters('location')]"
 					},
 					"safekitFileUri": {
-						"value": "[if(equals(length(parameters('safekitFileUri')),0),variables('safekitpkgUrl')[variables('ostype')],parameters('safekitFileUri'))]"
+						"value": "[if(equals((parameters('safekitFileUri')),'default'),variables('safekitpkgUrl')[variables('ostype')],parameters('safekitFileUri'))]"
 					},
 					"_artifactsLocation": {
 						"value": "[parameters('_artifactsLocation')]"
