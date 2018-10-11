@@ -6,10 +6,10 @@ param(
 )
 
 if( $modulepkg ){
-    $module = $modulepkg.Split(',') 
+    $module = $modulepkg.Split(',') | Get-ChildItem
 }
 else{
-    $module = [array] (ls *.safe)
+    $module = [array] (Get-ChildItem "*.safe")
 }
 
 if($module.Length){ 
@@ -21,7 +21,7 @@ if($module.Length){
 				$modulename = $($_.name.Replace(".safe",""))
 			}
             
-            & $safekitcmd module install -m $modulename $_
+            & $safekitcmd module install -m $modulename $_.fullname
 			if($modulecfgscript -and (Test-Path  "./$modulecfgscript")){
 				& ./$modulecfgscript
 			}
