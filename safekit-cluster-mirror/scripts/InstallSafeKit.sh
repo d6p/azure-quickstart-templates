@@ -1,14 +1,14 @@
 #!/bin/bash
 
-echo "Install SafeKit"
+echo "Install SafeKit from `ls ./*.bin`"
 
-if [-f safekit*.bin]; then
-	chmod +x ./safekit*.bin
-	./safekit*.bin
-fi
+
+chmod +x ./safekit*.bin
+./safekit*.bin
+
 
 yum -y localinstall ./safekit*.rpm
-rm ./safekit*.bin ./safekit*.rpm
+#rm ./safekit*.bin ./safekit*.rpm
 
 echo "Install powershell"
 # Register the Microsoft RedHat repository
