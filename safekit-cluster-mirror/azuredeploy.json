@@ -139,7 +139,7 @@
 						"value": "[parameters('location')]"
 					},
 					"safekitFileUri": {
-						"value": "[if(equals((parameters('safekitFileUri')),'default'),variables('safekitpkgUrl')[variables('ostype')],parameters('safekitFileUri'))]"
+						"value": "[if(equals(parameters('safekitFileUri'),'default'),variables('safekitpkgUrl')[variables('ostype')],parameters('safekitFileUri'))]"
 					},
 					"_artifactsLocation": {
 						"value": "[parameters('_artifactsLocation')]"
