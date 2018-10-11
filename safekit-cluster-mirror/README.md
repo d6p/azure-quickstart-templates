@@ -9,11 +9,11 @@ This template deploys 2 vms (windows or linux) with SafeKit (see <a href="https:
 Each VM has a public IP address.
 
 + a public VIP associated with a public loadbalancer is deployed.
-+ A mirror application module (name: "mirror") is deployed and configured. 
++ A mirror application module (name: "mirror") is deployed and configured. See <a href="https://www.evidian.com/products/high-availability-software-for-application-clustering/file-replication-byte-level-with-failover-mirror-cluster/">this page</a>
 + The public loadbalancer is configured with:
   +	the public VIP as frontend IP
   +	All the VMs in its backend pool.
-  + A health probe to check the mirror module state
+  + A health probe to check the mirror application module state
   + A loadbalancing rule for external port 9453, internal port 9453 to access the test url ('mosaic')
 
 ## How to use
