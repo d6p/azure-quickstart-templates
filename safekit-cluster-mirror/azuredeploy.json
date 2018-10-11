@@ -88,7 +88,7 @@
 		"adminUsername": "[if(empty(parameters('adminUser')),concat('admin',resourceGroup().name),parameters('adminUser'))]",
 		"skcfgmoduletemplate": "[concat(uri(parameters('_artifactsLocation'),'nestedtemplates/cfgMirror.json'),parameters('_artifactsLocationSasToken'))]",
 		"safekitpkgUrl": {
-			"windows": "https://support.evidian.com/solutions/downloads/safekit/version_7.3/platforms/linux/beta_versions/safekit_windows_x86_64_7_4_0_0.msi",
+			"windows": "https://support.evidian.com/solutions/downloads/safekit/version_7.3/platforms/windows/beta_versions/safekit_windows_x86_64_7_4_0_0.msi",
 			"linux": "https://support.evidian.com/solutions/downloads/safekit/version_7.3/platforms/linux/beta_versions/safekit_x86_64_7_4_0_0.bin"
 		},
 		"mirrorUrl": {
