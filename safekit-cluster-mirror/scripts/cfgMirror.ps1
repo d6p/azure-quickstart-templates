@@ -1,10 +1,10 @@
 param(
-	[string] $safekitcmd
-	[string] $safekitmod
+	[string] $safekitcmd,
+	[string] $safekitmod,
 	[string] $modname
 )
 
-$targetDir = "."
+
 
 function Log {
 	param(
@@ -30,6 +30,8 @@ if ($modname){
 
 	$res = & $safekitcmd -H "*" -E $modname
 	Log "$modname => $res"
+	& $safekitcmd prim -m $modname
+	& $safekitcmd -H "*" start -m $modname
 }
 
 Log "end of script"
