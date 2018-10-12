@@ -20,17 +20,17 @@ Log $MName
 
 if ($MName){
 
-	$ucfg = [Xml] (Get-Content "$safekitmod/$modname/conf/userconfig.xml")
+	$ucfg = [Xml] (Get-Content "$safekitmod/$MName/conf/userconfig.xml")
 	$ucfg.safe.service.heart.heartbeat.name="default"
 
 
-	$ucfg.Save("$safekitmod/$modname/conf/userconfig.xml")
+	$ucfg.Save("$safekitmod/$MName/conf/userconfig.xml")
 	Log "$ucfg.OuterXml"
 	
 
 	$res = & $safekitcmd -H "*" -E $MName
-	Log "$modname => $res"
-	& $safekitcmd prim -m $modname
+	Log "$MName => $res"
+	& $safekitcmd prim -m $MName
 	& $safekitcmd -H "*" start -m $MName
 }
 
