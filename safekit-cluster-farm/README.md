@@ -1,6 +1,6 @@
 # SafeKit cluster (farm application module)
 
-<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fd6p%2Fazure-quickstart-templates%2Fsafekit-cluster-mirror%2Fsafekit-cluster-mirror%2Fazuredeploy.json" target="_blank">
+<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fd6p%2Fazure-quickstart-templates%2Fsafekit-cluster-farm%2Fsafekit-cluster-farm%2Fazuredeploy.json" target="_blank">
     <img src="http://azuredeploy.net/deploybutton.png"/>
 </a>
 
@@ -9,7 +9,7 @@ This template deploys between 2 and 4 vms (windows or linux) with SafeKit try&bu
 Each VM has a public IP address.
 
 + a public VIP associated with a public loadbalancer is deployed.
-+ A farm application module (name: "farm") is deployed and configured. See <a href="https://www.evidian.com/products/high-availability-software-for-application-clustering/network-load-balancing-cluster/">this page</a>
++ A farm application module (name: "farm") is deployed and configured. See <a href="https://www.evidian.com/products/high-availability-software-for-application-clustering/network-load-balancing-cluster/">this page</a> for more information.
 + The public loadbalancer is configured with:
   +	the public VIP as frontend IP
   +	All the VMs in its backend pool.
