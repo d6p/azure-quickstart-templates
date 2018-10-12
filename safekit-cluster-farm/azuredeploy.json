@@ -13,6 +13,18 @@
 				"Linux CentOS"
 			]
 		},
+		"clusterNodes": {
+			"type": "int",
+			"metadata": {
+				"description": "number of VM nodes to create"
+			},
+			"defaultValue": 2,
+			"allowedValues": [
+				2,
+				3,
+				4
+			]
+		},
 		"vmSize": {
 			"type": "string",
 			"metadata": {
@@ -80,20 +92,20 @@
 		}
 	},
 	"variables": {
-		"clusternodes": 2,
+		"clusternodes": "[parameters('clusterNodes')]",
 		"vmname": "VM1",
-		"moduleName": "mirror",
+		"moduleName": "farm",
 		"cltemplate": "[uri(parameters('_artifactsLocation'),'nestedtemplates/cluster.json')]",
 		"ostype": "[if(equals(parameters('OS'), 'Linux CentOS'),'linux','windows')]",
 		"adminUsername": "[if(empty(parameters('adminUser')),concat('admin',resourceGroup().name),parameters('adminUser'))]",
-		"skcfgmoduletemplate": "[concat(uri(parameters('_artifactsLocation'),'nestedtemplates/cfgMirror.json'),parameters('_artifactsLocationSasToken'))]",
+		"skcfgmoduletemplate": "[concat(uri(parameters('_artifactsLocation'),'nestedtemplates/cfgFarm.json'),parameters('_artifactsLocationSasToken'))]",
 		"safekitpkgUrl": {
 			"windows": "https://support.evidian.com/solutions/downloads/safekit/version_7.3/platforms/windows/beta_versions/safekit_windows_x86_64_7_4_0_0.msi",
 			"linux": "https://support.evidian.com/solutions/downloads/safekit/version_7.3/platforms/linux/beta_versions/safekit_x86_64_7_4_0_0.bin"
 		},
-		"mirrorUrl": {
-			"windows": "https://support.evidian.com/solutions/downloads/safekit/version_7.3/application_modules/windows/mirror.safe",
-			"linux": "https://support.evidian.com/solutions/downloads/safekit/version_7.3/application_modules/linux/mirror.safe"
+		"farmUrl": {
+			"windows": "https://support.evidian.com/solutions/downloads/safekit/version_7.3/application_modules/windows/farm.safe",
+			"linux": "https://support.evidian.com/solutions/downloads/safekit/version_7.3/application_modules/linux/farm.safe"
 		}
 	},
 	"resources": [
@@ -124,7 +136,7 @@
 						"value": "[parameters('adminPassword')]"
 					},
 					"moduleUrl": {
-						"value": "[variables('mirrorUrl')[variables('ostype')]]"
+						"value": "[variables('farmUrl')[variables('ostype')]]"
 					},
 					"moduleName": {
 						"value": "[variables('moduleName')]"

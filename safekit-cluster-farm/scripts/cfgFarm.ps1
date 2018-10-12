@@ -21,7 +21,7 @@ Log $MName
 if ($MName){
 
 	$ucfg = [Xml] (Get-Content "$safekitmod/$MName/conf/userconfig.xml")
-	$ucfg.safe.service.heart.heartbeat.name="default"
+	$ucfg.safe.service.farm.lan.name="default"
 
 
 	$ucfg.Save("$safekitmod/$MName/conf/userconfig.xml")
@@ -30,7 +30,7 @@ if ($MName){
 
 	$res = & $safekitcmd -H "*" -E $MName
 	Log "$MName => $res"
-	& $safekitcmd prim -m $MName
+	
 	& $safekitcmd -H "*" start -m $MName
 }
 

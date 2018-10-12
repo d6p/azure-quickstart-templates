@@ -1,9 +1,9 @@
 {
   "$schema": "https://aka.ms/azure-quickstart-templates-metadata-schema#",
   "type": "QuickStart",
-  "itemDisplayName": "SafeKit Mirror Cluster",
-  "description": "A SafeKit Cluster with a mirror module configured,  running CentOS or Windows Server 2016, a loadbalanced VIP",
-  "summary": "Example of SafeKit mirror cluster in Azure",
+  "itemDisplayName": "SafeKit Farm Cluster",
+  "description": "A SafeKit Cluster with a farm module configured,  running CentOS or Windows Server 2016, with a loadbalanced VIP",
+  "summary": "Example of SafeKit farm cluster in Azure",
   "githubUsername": "d6p",
   "dateUpdated": "2018-10-10"
 }

@@ -45,7 +45,7 @@
 		}
 	},
 	"variables": {
-		"cfgModuleuri": "[concat(uri(parameters('_artifactsLocation'),'scripts/cfgMirror.ps1'),parameters('_artifactsLocationSasToken'))]",
+		"cfgModuleuri": "[concat(uri(parameters('_artifactsLocation'),'scripts/cfgFarm.ps1'),parameters('_artifactsLocationSasToken'))]",
 		"properties": {
 			"windows": {
 				"publisher": "Microsoft.Compute",
@@ -56,7 +56,7 @@
 					"fileUris": [
 						"[variables('cfgModuleuri')]"
 					],
-					"commandToExecute": "[concat('powershell -ExecutionPolicy Unrestricted -File  .\\cfgMirror.ps1 -safekitcmd C:/safekit/safekit -safekitmod C:/safekit/modules -MName \"',parameters('moduleName'),'\"')]"
+					"commandToExecute": "[concat('powershell -ExecutionPolicy Unrestricted -File  .\\cfgFarm.ps1 -safekitcmd C:/safekit/safekit -safekitmod C:/safekit/modules -MName \"',parameters('moduleName'),'\"')]"
 				}
 			},
 			"linux": {
@@ -70,7 +70,7 @@
 					"fileUris": [
 						"[variables('cfgModuleuri')]"
 					],
-					"commandToExecute": "[concat('pwsh ./cfgMirror.ps1 -safekitcmd /opt/safekit/safekit -safekitmod /opt/safekit/modules -MName \"',parameters('moduleName'),'\"')]"
+					"commandToExecute": "[concat('pwsh ./cfgFarm.ps1 -safekitcmd /opt/safekit/safekit -safekitmod /opt/safekit/modules -MName \"',parameters('moduleName'),'\"')]"
 				}
 			}
 		}
