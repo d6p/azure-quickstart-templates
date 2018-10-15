@@ -199,14 +199,6 @@
 		}
 	],
 	"outputs": {
-		"adminUser": {
-			"type": "string",
-			"value": "[variables('adminUserName')]"
-		},
-		"fqdn": {
-			"type": "string",
-			"value": "[reference('safekitCluster').outputs.fqdn.value]"
-		},
 		"Credentials Url": {
 			"type": "string",
 			"value": "[reference('safekitCluster').outputs['Credentials Url'].value]"
@@ -219,9 +211,17 @@
 			"type": "string",
 			"value": "[reference('safekitCluster').outputs['Console Url'].value]"
 		},
-		"Mosaic URL": {
+		"Test URL": {
 			"type": "string",
 			"value": "[reference('safekitCluster').outputs['Mosaic URL'].value]"
+		},
+				"adminUser": {
+			"type": "string",
+			"value": "[variables('adminUserName')]"
+		},
+		"fqdn": {
+			"type": "string",
+			"value": "[reference('safekitCluster').outputs.fqdn.value]"
 		}
 	}
 }
