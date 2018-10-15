@@ -199,27 +199,27 @@
 		}
 	],
 	"outputs": {
-		"Credentials Url": {
+		"FIRST GET THE CREDENTIALS": {
 			"type": "string",
 			"value": "[reference('safekitCluster').outputs['Credentials Url'].value]"
 		},
-		"Credentials Url Login": {
+		"LOGIN TO GET THE CREDENTIALS": {
 			"type": "string",
 			"value": "[reference('safekitCluster').outputs['Credentials Url Login'].value]"
 		},
-		"Console Url": {
+		"START THE CONSOLE": {
 			"type": "string",
 			"value": "[reference('safekitCluster').outputs['Console Url'].value]"
 		},
-		"Test URL": {
+		"TEST THE VIRTUAL IP": {
 			"type": "string",
 			"value": "[reference('safekitCluster').outputs['Mosaic URL'].value]"
 		},
-				"adminUser": {
+		"ADMINUSER": {
 			"type": "string",
 			"value": "[variables('adminUserName')]"
 		},
-		"fqdn": {
+		"FQDN": {
 			"type": "string",
 			"value": "[reference('safekitCluster').outputs.fqdn.value]"
 		}
