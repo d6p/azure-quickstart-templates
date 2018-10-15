@@ -55,7 +55,9 @@
 				"settings": {
 					"fileUris": [
 						"[variables('cfgModuleuri')]"
-					],
+					]
+				},
+				"protectedSettings":{
 					"commandToExecute": "[concat('powershell -ExecutionPolicy Unrestricted -File  .\\cfgFarm.ps1 -safekitcmd C:/safekit/safekit -safekitmod C:/safekit/modules -MName \"',parameters('moduleName'),'\"')]"
 				}
 			},
@@ -69,7 +71,9 @@
 					"timestamp": 1,
 					"fileUris": [
 						"[variables('cfgModuleuri')]"
-					],
+					]
+				},
+				"protectedSettings":{
 					"commandToExecute": "[concat('pwsh ./cfgFarm.ps1 -safekitcmd /opt/safekit/safekit -safekitmod /opt/safekit/modules -MName \"',parameters('moduleName'),'\"')]"
 				}
 			}

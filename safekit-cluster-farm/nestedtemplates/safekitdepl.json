@@ -76,7 +76,9 @@
 				"typeHandlerVersion": "1.9",
 				"autoUpgradeMinorVersion": true,
 				"settings": {
-					"fileUris": "[variables('fileUrisW')]",
+					"fileUris": "[variables('fileUrisW')]"
+				},
+				"protectedSettings":{
 					"commandToExecute": "[concat('powershell -ExecutionPolicy Unrestricted -File  .\\InstallSafekit.ps1 -SkFile ',variables('skpkg'),' -Passwd \"',parameters('capassword'),'\"')]"
 				}
 			},
@@ -87,7 +89,9 @@
 				"autoUpgradeMinorVersion": true,
 				"settings": {
 					"skipDos2Unix": false,
-					"fileUris": "[variables('fileUrisL')]",
+					"fileUris": "[variables('fileUrisL')]"
+				},
+				"protectedSettings": {
 					"commandToExecute": "[concat('sh InstallSafeKit.sh ./', variables('skpkg'), ' \"',parameters('capassword'),'\"')]"
 				}
 			}
