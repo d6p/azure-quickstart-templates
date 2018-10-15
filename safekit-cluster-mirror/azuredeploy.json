@@ -267,7 +267,7 @@
 									"inputs": [
 										{
 											"name": "id",
-											"value": "[resourceId(resourceGroup().name,'Microsoft.Network/publicIPAddresses',concat('pip',retourceGroup().name,'vip'))]"
+											"value": "[resourceId(resourceGroup().name,'Microsoft.Network/publicIPAddresses',concat('pip',resourceGroup().name,'vip'))]"
 										}
 									],
 									"type": "Extension/Microsoft_Azure_Network/PartType/PublicIpAddressPart",
