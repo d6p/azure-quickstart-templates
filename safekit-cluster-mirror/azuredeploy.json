@@ -184,6 +184,209 @@
 					}
 				}
 			}
+		},
+		{
+			"properties": {
+				"lenses": {
+					"0": {
+						"order": 0,
+						"parts": {
+							"0": {
+								"position": {
+									"x": 0,
+									"y": 0,
+									"colSpan": 2,
+									"rowSpan": 1
+								},
+								"metadata": {
+									"inputs": [
+										{
+											"name": "id",
+											"value": "[resourceId(resourceGroup().name,'Microsoft.Compute/virtualMachines','VM1')]"
+										}
+									],
+									"type": "Extension/Microsoft_Azure_Compute/PartType/VirtualMachinePart",
+									"asset": {
+										"idInputName": "id",
+										"type": "VirtualMachine"
+									},
+									"defaultMenuItemId": "overview"
+								}
+							},
+							"1": {
+								"position": {
+									"x": 2,
+									"y": 0,
+									"colSpan": 1,
+									"rowSpan": 1
+								},
+								"metadata": {
+									"inputs": [
+										{
+											"name": "id",
+											"value": "[resourceId(resourceGroup().name,'Microsoft.Network/publicIPAddresses','pipVM1')]"
+										}
+									],
+									"type": "Extension/Microsoft_Azure_Network/PartType/PublicIpAddressPart",
+									"asset": {
+										"idInputName": "id",
+										"type": "PublicIpAddress"
+									}
+								}
+							},
+							"2": {
+								"position": {
+									"x": 4,
+									"y": 0,
+									"colSpan": 2,
+									"rowSpan": 2
+								},
+								"metadata": {
+									"inputs": [
+										{
+											"name": "id",
+											"value": "[resourceId(resourceGroup().name,'Microsoft.Network/loadBalancers',concat(resourceGroup().name,'vipLB'))]"
+										}
+									],
+									"type": "Extension/Microsoft_Azure_Network/PartType/LoadBalancerPart",
+									"asset": {
+										"idInputName": "id",
+										"type": "LoadBalancer"
+									},
+									"defaultMenuItemId": "overview"
+								}
+							},
+							"3": {
+								"position": {
+									"x": 6,
+									"y": 0,
+									"colSpan": 2,
+									"rowSpan": 2
+								},
+								"metadata": {
+									"inputs": [
+										{
+											"name": "id",
+											"value": "[resourceId(resourceGroup().name,'Microsoft.Network/publicIPAddresses',concat('pip',retourceGroup().name,'vip'))]"
+										}
+									],
+									"type": "Extension/Microsoft_Azure_Network/PartType/PublicIpAddressPart",
+									"asset": {
+										"idInputName": "id",
+										"type": "PublicIpAddress"
+									}
+								}
+							},
+							"4": {
+								"position": {
+									"x": 0,
+									"y": 1,
+									"colSpan": 2,
+									"rowSpan": 1
+								},
+								"metadata": {
+									"inputs": [
+										{
+											"name": "id",
+											"value": "[resourceId(resourceGroup().name,'Microsoft.Compute/virtualMachines','VM2')]"
+										}
+									],
+									"type": "Extension/Microsoft_Azure_Compute/PartType/VirtualMachinePart",
+									"asset": {
+										"idInputName": "id",
+										"type": "VirtualMachine"
+									},
+									"defaultMenuItemId": "overview"
+								}
+							},
+							"5": {
+								"position": {
+									"x": 2,
+									"y": 1,
+									"colSpan": 1,
+									"rowSpan": 1
+								},
+								"metadata": {
+									"inputs": [
+										{
+											"name": "id",
+											"value": "[resourceId(resourceGroup().name,'Microsoft.Network/publicIPAddresses','pipVM2')]"
+										}
+									],
+									"type": "Extension/Microsoft_Azure_Network/PartType/PublicIpAddressPart",
+									"asset": {
+										"idInputName": "id",
+										"type": "PublicIpAddress"
+									}
+								}
+							},
+							"6": {
+								"position": {
+									"x": 0,
+									"y": 3,
+									"colSpan": 3,
+									"rowSpan": 3
+								},
+								"metadata": {
+									"inputs": [
+										
+									],
+									"type": "Extension/HubsExtension/PartType/MarkdownPart",
+									"settings": {
+										"content": {
+											"settings": {
+												"content": "[concat('__Usage__\n\nblah blah,\nGet the credentials by following <a href=\"',reference('safekitCluster').outputs['Credentials Url'].value,' target=\"_blank\">this link</a> that open in a new tab.\n\nConnect to the <a href=\"',reference('safekitCluster').outputs['Console Url'].value,'?proxy=true\" target=\"_blank\">SafeKit Console</a>\n\nConnect to the <a href=\"',reference('safekitCluster').outputs['Mosaic URL'].value,'\" target='_blank'>test url</a>\n",
+												"title": "SafeKit Mirror cluster",
+												"subtitle": "2 machines with safekit installed and a mirror AM running"
+											}
+										}
+									}
+								}
+							},
+							"7": {
+								"position": {
+									"x": 4,
+									"y": 3,
+									"colSpan": 4,
+									"rowSpan": 3
+								},
+								"metadata": {
+									"inputs": [
+										{
+											"name": "queryInputs",
+											"value": {
+												"subscriptions": "[subscription().subscriptionId]",
+												"regions": "[resourceGroup().location]",
+												"services": "",
+												"resourceGroupId": "all",
+												"timeSpan": "5",
+												"startTime": "2018-10-12T13:04:52.182Z",
+												"endTime": "2018-10-15T13:04:52.182Z",
+												"queryName": "my region",
+												"queryId": "a48a947d-fe36-4450-bd0f-0bb93012f387",
+												"loadFromCache": false,
+												"communicationType": "incident",
+												"statusFilter": "active"
+											}
+										}
+									],
+									"type": "Extension/Microsoft_Azure_Health/PartType/ServiceIssuesTilePart"
+								}
+							}
+						}
+					}
+				}
+			},
+			"dependsOn": [
+				"safekitCluster"
+			],
+			"name": "SafeKit mirror",
+			"type": "Microsoft.Portal/dashboards",
+			"location": "[resourceGroup().location]",
+			"tags": {
+				"hidden-title": "SafeKit mirror"
+			},
+			"apiVersion": "2015-08-01-preview"
 		}
 	],
 	"outputs": {
