@@ -380,7 +380,7 @@
 			"dependsOn": [
 				"safekitCluster"
 			],
-			"name": "SafeKit mirror",
+			"name": "SafeKitMirror",
 			"type": "Microsoft.Portal/dashboards",
 			"location": "[resourceGroup().location]",
 			"tags": {
