@@ -63,7 +63,9 @@
 				"fileUris": [
 					"[parameters('moduleUrl')]",
 					"[variables('installModuleuri')]"
-				],
+				]
+			},
+			"protectedSettings":{
 				"commandToExecute": "[concat('powershell -ExecutionPolicy Unrestricted -File  .\\installModule.ps1 -safekitcmd C:/safekit/safekit -MName \"',parameters('moduleName'),'\"')]"
 			}
 		},
@@ -78,7 +80,9 @@
 				"fileUris": [
 					"[parameters('moduleUrl')]",
 					"[variables('installModuleuri')]"
-				],
+				]
+			},
+			"protectedSettings":{
 				"commandToExecute": "[concat('pwsh ./installModule.ps1 -safekitcmd /opt/safekit/safekit -MName \"',parameters('moduleName'),'\"')]"
 			}
 		}
