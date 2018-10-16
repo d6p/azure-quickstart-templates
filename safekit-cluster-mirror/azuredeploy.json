@@ -345,7 +345,7 @@
 									"settings": {
 										"content": {
 											"settings": {
-												"content": "[concat('__Usage__\n\n\nGet the credentials by following <a href=\"',reference('safekitCluster').outputs['Credentials Url'].value,'\" target=\"_blank\">this link</a>.\n\nConnect to the <a href=\"',reference('safekitCluster').outputs['Console Url'].value,'?proxy=true\" target=\"_blank\">SafeKit Console</a>\n\nConnect to the <a href=\"',reference('safekitCluster').outputs['Mosaic URL'].value,'\" target=\"_blank\">test url</a>\n')]",
+												"content": "[concat('__Usage__\n\n\nGet the credentials by following <a href=\"',reference('safekitCluster').outputs['Credentials Url'].value,'\" target=\"_blank\">this link</a>.\n\nConnect to the <a href=\"',reference('safekitCluster').outputs['Console Url'].value,'?proxy=true\" target=\"_blank\">SafeKit Console</a>\n\nConnect to the <a href=\"',reference('safekitCluster').outputs['Mosaic URL'].value,'\" target=\"_blank\">test url</a>\n__Architecture__<br><br><img src=\"https://www.evidian.com/safekit/images/farm-cluster-azure-load-balancing-cluster.jpg\" width=\"400\"></img><br>')]",
 												"title": "SafeKit Mirror cluster",
 												"subtitle": "2 machines with safekit installed and a mirror AM running"
 											}
