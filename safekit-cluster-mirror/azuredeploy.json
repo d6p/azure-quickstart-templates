@@ -88,12 +88,12 @@
 		"adminUsername": "[if(empty(parameters('adminUser')),concat('admin',resourceGroup().name),parameters('adminUser'))]",
 		"skcfgmoduletemplate": "[concat(uri(parameters('_artifactsLocation'),'nestedtemplates/cfgMirror.json'),parameters('_artifactsLocationSasToken'))]",
 		"safekitpkgUrl": {
-			"windows": "https://support.evidian.com/solutions/downloads/safekit/version_7.3/platforms/windows/beta_versions/safekit_windows_x86_64_7_4_0_0.msi",
-			"linux": "https://support.evidian.com/solutions/downloads/safekit/version_7.3/platforms/linux/beta_versions/safekit_x86_64_7_4_0_0.bin"
+			"windows": "https://support.evidian.com/solutions/downloads/safekit/cloud/platforms/windows/current_versions/safekit_cloud.msi",
+			"linux": "https://support.evidian.com/solutions/downloads/safekit/cloud/platforms/linux/current_versions/safekit_cloud.bin"
 		},
 		"mirrorUrl": {
-			"windows": "https://support.evidian.com/solutions/downloads/safekit/version_7.3/application_modules/windows/mirror.safe",
-			"linux": "https://support.evidian.com/solutions/downloads/safekit/version_7.3/application_modules/linux/mirror.safe"
+			"windows": "https://support.evidian.com/solutions/downloads/safekit/cloud/application_modules/windows/mirror.safe",
+			"linux": "https://support.evidian.com/solutions/downloads/safekit/cloud/application_modules/linux/mirror.safe"
 		}
 	},
 	"resources": [
@@ -186,6 +186,16 @@
 			}
 		},
 		{
+			"apiVersion": "2015-08-01-preview",		
+			"type": "Microsoft.Portal/dashboards",
+			"name": "SafeKitMirror",
+			"location": "[resourceGroup().location]",
+			"tags": {
+				"hidden-title": "SafeKit mirror"
+			},
+			"dependsOn": [
+				"safekitCluster"
+			],
 			"properties": {
 				"lenses": {
 					"0": {
@@ -335,7 +345,7 @@
 									"settings": {
 										"content": {
 											"settings": {
-												"content": "[concat('__Usage__\n\n\nGet the credentials by following <a href=\"',reference('safekitCluster').outputs['Credentials Url'].value,' target=\"_blank\">this link</a> that open in a new tab.\n\nConnect to the <a href=\"',reference('safekitCluster').outputs['Console Url'].value,'?proxy=true\" target=\"_blank\">SafeKit Console</a>\n\nConnect to the <a href=\"',reference('safekitCluster').outputs['Mosaic URL'].value,'\" target=\"_blank\">test url</a>\n')]",
+												"content": "[concat('__Usage__\n\n\nGet the credentials by following <a href=\"',reference('safekitCluster').outputs['Credentials Url'].value,' target=\"_blank\">this link</a>.\n\nConnect to the <a href=\"',reference('safekitCluster').outputs['Console Url'].value,'?proxy=true\" target=\"_blank\">SafeKit Console</a>\n\nConnect to the <a href=\"',reference('safekitCluster').outputs['Mosaic URL'].value,'\" target=\"_blank\">test url</a>\n')]",
 												"title": "SafeKit Mirror cluster",
 												"subtitle": "2 machines with safekit installed and a mirror AM running"
 											}
@@ -376,17 +386,8 @@
 						}
 					}
 				}
-			},
-			"dependsOn": [
-				"safekitCluster"
-			],
-			"name": "SafeKitMirror",
-			"type": "Microsoft.Portal/dashboards",
-			"location": "[resourceGroup().location]",
-			"tags": {
-				"hidden-title": "SafeKit mirror"
-			},
-			"apiVersion": "2015-08-01-preview"
+			}
+
 		}
 	],
 	"outputs": {
