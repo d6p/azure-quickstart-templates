@@ -282,7 +282,7 @@
 									"settings": {
 										"content": {
 											"settings": {
-												"content": "[concat('__Usage__\n\n\nRetrieve credentials (client certificate&key and CA certificate) from <a href=\"',reference('safekitCluster').outputs['Credentials Url'].value,'\" target=\"_blank\">here</a>.\n(To log in: User: "CA_admin", Password: "<the password you entered at deployment time>")\n\nConnect to the <a href=\"',reference('safekitCluster').outputs['Console Url'].value,'?proxy=true\" target=\"_blank\">SafeKit Web  Console</a>\n\nConnect to the <a href=\"',reference('safekitCluster').outputs['Mosaic URL'].value,'\" target=\"_blank\">Test Url (mosaic)</a>\n')]",
+												"content": "[concat('__Usage__\n\n\nRetrieve credentials (client certificate&key and CA certificate) from <a href=\"',reference('safekitCluster').outputs['Credentials Url'].value,'\" target=\"_blank\">here</a>.\n(To log in: User: CA_admin, Password: <the password you entered at deployment time>)\n\nConnect to the <a href=\"',reference('safekitCluster').outputs['Console Url'].value,'?proxy=true\" target=\"_blank\">SafeKit Web  Console</a>\n\nConnect to the <a href=\"',reference('safekitCluster').outputs['Mosaic URL'].value,'\" target=\"_blank\">Test Url (mosaic)</a>\n')]",
 												"title": "SafeKit Mirror Cluster",
 												"subtitle": "2 SafeKit nodes running a mirror AM"
 											}
