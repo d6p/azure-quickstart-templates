@@ -9,7 +9,7 @@
       }
     },
     "adminPassword": {
-      "type": "securestring",
+      "type": "secureObject",
       "metadata": {
         "description": "Password for hazelcast VMs, if authenticationType is set to 'password'"
       }
@@ -141,7 +141,9 @@
   },
   "variables": {
     "imagePublisher": "Canonical",
+    "newStorageAccountName": "[concat(uniqueString(resourceGroup().id), 'hazelcast')]",
     "imageOffer": "UbuntuServer",
+    "OSDiskName": "hazelcastosdisk",
     "nicName": "myVMNic",
     "addressPrefix": "10.0.0.0/16",
     "subnetName": "Subnet",
@@ -149,6 +151,7 @@
     "storageAccountType": "Standard_LRS",
     "publicIPAddressName": "hazelcast0PubIp",
     "publicIPAddressType": "Dynamic",
+    "vmStorageAccountContainerName": "vhds",
     "vmName": "hazelcast",
     "virtualNetworkName": "hazelcastVNet",
     "osProfile": "[variables(concat('osProfile', parameters('authenticationType')))]",
@@ -185,6 +188,15 @@
     ]
   },
   "resources": [
+    {
+      "type": "Microsoft.Storage/storageAccounts",
+      "name": "[variables('newStorageAccountName')]",
+      "apiVersion": "2015-05-01-preview",
+      "location": "[parameters('location')]",
+      "properties": {
+        "accountType": "[variables('storageAccountType')]"
+      }
+    },
     {
       "apiVersion": "2015-05-01-preview",
       "type": "Microsoft.Network/publicIPAddresses",
@@ -271,11 +283,12 @@
       }
     },
     {
-      "apiVersion": "2017-03-30",
+      "apiVersion": "2015-05-01-preview",
       "type": "Microsoft.Compute/virtualMachines",
       "name": "[concat(variables('vmName'), '0')]",
       "location": "[parameters('location')]",
       "dependsOn": [
+        "[concat('Microsoft.Storage/storageAccounts/', variables('newStorageAccountName'))]",
         "[concat('Microsoft.Network/networkInterfaces/', variables('nicName'), '0')]"
       ],
       "tags": {
@@ -294,7 +307,10 @@
             "version": "latest"
           },
           "osDisk": {
-            "name": "[concat(variables('vmName'), '0','_OSDisk')]",
+            "name": "osdisk1",
+            "vhd": {
+              "uri": "[concat('http://',variables('newStorageAccountName'),'.blob.core.windows.net/',variables('vmStorageAccountContainerName'),'/',variables('OSDiskName'), '0', '.vhd')]"
+            },
             "caching": "ReadWrite",
             "createOption": "FromImage"
           }
@@ -309,11 +325,12 @@
       }
     },
     {
-      "apiVersion": "2017-03-30",
+      "apiVersion": "2015-05-01-preview",
       "type": "Microsoft.Compute/virtualMachines",
       "name": "[concat(variables('vmName'), copyIndex(1))]",
       "location": "[parameters('location')]",
       "dependsOn": [
+        "[concat('Microsoft.Storage/storageAccounts/', variables('newStorageAccountName'))]",
         "[concat('Microsoft.Network/networkInterfaces/', variables('nicName'), copyIndex(1))]",
         "createNics"
       ],
@@ -333,7 +350,10 @@
             "version": "latest"
           },
           "osDisk": {
-            "name": "[concat(variables('vmName'), copyIndex(1),'_OSDisk')]",
+            "name": "osdisk1",
+            "vhd": {
+              "uri": "[concat('http://',variables('newStorageAccountName'),'.blob.core.windows.net/',variables('vmStorageAccountContainerName'),'/',variables('OSDiskName'), copyIndex(1), '.vhd')]"
+            },
             "caching": "ReadWrite",
             "createOption": "FromImage"
           }

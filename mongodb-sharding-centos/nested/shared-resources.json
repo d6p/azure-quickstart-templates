@@ -23,20 +23,24 @@
     }
   },
   "variables": {
+    "storageAccountName": "[concat(uniquestring(resourceGroup().id), 'standardsa')]"
   },
   "resources": [
     {
-      "apiVersion": "2017-12-01",
+      "apiVersion": "2015-06-15",
+      "type": "Microsoft.Storage/storageAccounts",
+      "name": "[variables('storageAccountName')]",
+      "location": "[parameters('location')]",
+      "properties": {
+        "accountType": "Standard_LRS"
+      }
+    },
+    {
+      "apiVersion": "2015-06-15",
       "type": "Microsoft.Compute/availabilitySets",
       "name": "[concat(parameters('namespace'), 'set')]",
       "location": "[parameters('location')]",
-      "sku": {
-        "name": "Aligned"
-        },
-        "properties": { 
-        "platformFaultDomainCount": 2,
-        "platformUpdateDomainCount": 5
-        }
+      "properties": {}
     },
     {
       "apiVersion": "2015-06-15",

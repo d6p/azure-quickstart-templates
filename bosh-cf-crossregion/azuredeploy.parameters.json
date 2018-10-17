@@ -6,7 +6,7 @@
       "value": "GEN-UNIQUE"
     },
     "adminUsername": {
-      "value": "GEN-UNIQUE"
+      "value": "azureuser"
     },
     "sshKeyData": {
       "value": "GEN-SSH-PUB-KEY"

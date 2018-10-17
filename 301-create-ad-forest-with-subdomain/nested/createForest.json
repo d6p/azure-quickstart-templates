@@ -5,6 +5,10 @@
     "vmName": {
       "type": "string"
     },
+    "location": {
+      "type": "string",
+      "defaultValue": "[resourceGroup().location]"
+    },
     "adminUsername": {
       "type": "string"
     },
@@ -16,10 +20,6 @@
     },
     "DnsForwarder": {
       "type": "string"
-    },
-    "location": {
-      "type": "string",
-      "defaultValue": "[resourceGroup().location]"
     },
     "_artifactsLocation": {
       "type": "string"
@@ -34,10 +34,10 @@
     "adRootDC1ConfigurationFunction": "CreateADRootDC1.ps1\\CreateADRootDC1"
   },
   "resources": [
-	{
+    {
       "name": "[concat(parameters('vmName'),'/CreateADForest1')]",
       "type": "Microsoft.Compute/virtualMachines/extensions",
-      "apiVersion": "2018-06-01",
+      "apiVersion": "2016-03-30",
       "location": "[parameters('location')]",
       "properties": {
         "publisher": "Microsoft.Powershell",

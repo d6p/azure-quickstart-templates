@@ -26,13 +26,10 @@
     "databaseDTU": {
       "type": "int",
       "allowedValues": [
-        2,
-        4,
-        8,
-        16,
-        32
+        50,
+        100
       ],
-      "defaultValue": 2,
+      "defaultValue": 50,
       "metadata": {
         "description": "Azure database for PostgreSQL pricing tier"
       }
@@ -40,15 +37,10 @@
     "databaseSkuName": {
       "type": "string",
       "allowedValues": [
-        "GP_Gen5_2",
-        "GP_Gen5_4",
-        "GP_Gen5_8",
-        "GP_Gen5_16",
-        "GP_Gen5_32",
-        "B_Gen5_1",
-        "B_Gen5_2"
+        "PostgreSQLB100",
+        "PostgreSQLB50"
       ],
-      "defaultValue": "GP_Gen5_2",
+      "defaultValue": "PostgreSQLB100",
       "metadata": {
         "description": "Azure database for PostgreSQL sku name : PostgreSQLB100 (Basic 100 DTU tier) and PostgreSQLB50 (Basic 50 DTU tier)"
       }
@@ -67,10 +59,9 @@
     "databaseSkuTier": {
       "type": "string",
       "allowedValues": [
-        "Basic",
-        "GeneralPurpose"
+        "Basic"
       ],
-      "defaultValue": "GeneralPurpose",
+      "defaultValue": "Basic",
       "metadata": {
         "description": "Azure database for PostgreSQL pricing tier"
       }
@@ -143,7 +134,7 @@
       "kind": "linux"
     },
     {
-      "apiVersion": "2017-12-01",
+      "apiVersion": "2016-02-01-privatepreview",
       "kind": "",
       "location": "[parameters('location')]",
       "name": "[variables('serverName')]",
@@ -158,13 +149,13 @@
         "tier": "[parameters('databaseSkuTier')]",
         "capacity": "[parameters('databaseDTU')]",
         "size": "[parameters('databaseSkuSizeMB')]",
-        "family": "Gen5"
+        "family": "SkuFamily"
       },
       "type": "Microsoft.DBforPostgreSQL/servers",
       "resources": [
         {
           "type": "firewallrules",
-          "apiVersion": "2017-12-01",
+          "apiVersion": "2016-02-01-privatepreview",
           "dependsOn": [
             "[concat('Microsoft.DBforPostgreSQL/servers/', variables('serverName'))]"
           ],
@@ -178,7 +169,7 @@
         {
           "name": "[variables('databaseName')]",
           "type": "databases",
-          "apiVersion": "2017-12-01",
+          "apiVersion": "2016-02-01-privatepreview",
           "properties": {
             "charset": "utf8",
             "collation": "English_United States.1252"

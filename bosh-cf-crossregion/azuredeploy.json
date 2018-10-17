@@ -436,7 +436,7 @@
       "name": "[concat(parameters('vmName'),'-bosh')]",
       "location": "[parameters('primaryLocation')]",
       "properties": {
-        "publicIPAllocationMethod": "Static"
+        "publicIPAllocationMethod": "static"
       }
     },
     {
@@ -445,7 +445,7 @@
       "name": "[concat(parameters('vmName'), '-cf-primary')]",
       "location": "[parameters('primaryLocation')]",
       "properties": {
-        "publicIPAllocationMethod": "Static"
+        "publicIPAllocationMethod": "static"
       }
     },
     {
@@ -454,7 +454,7 @@
       "name": "[concat(parameters('vmName'), '-cf-secondary')]",
       "location": "[parameters('secondaryLocation')]",
       "properties": {
-        "publicIPAllocationMethod": "Static"
+        "publicIPAllocationMethod": "static"
       }
     },
     {
@@ -687,11 +687,12 @@
       }
     },
     {
-      "apiVersion":  "2017-03-30", 
+      "apiVersion": "2015-06-15",
       "type": "Microsoft.Compute/virtualMachines",
       "name": "[parameters('vmName')]",
       "location": "[parameters('primaryLocation')]",
-      "dependsOn": [ 
+      "dependsOn": [
+        "[concat('Microsoft.Storage/storageAccounts/',variables('defaultprimaryStorageAccountName'))]",
         "[concat('Microsoft.Network/networkInterfaces/',variables('primaryNicName'))]"
       ],
       "properties": {
@@ -720,8 +721,11 @@
             "sku": "[variables('ubuntuOSVersion')]",
             "version": "latest"
           },
-          "osDisk": {           
-           "name": "[concat(parameters('vmName'),'_OSDisk')]", 
+          "osDisk": {
+            "name": "osdisk",
+            "vhd": {
+              "uri": "[concat('http://',variables('defaultprimaryStorageAccountName'),'.blob.',variables('environment').serviceHostBase,'/',variables('vmStorageAccountContainerName'),'/',parameters('vmName'),'-osdisk.vhd')]"
+            },
             "caching": "ReadWrite",
             "createOption": "FromImage"
           }
@@ -738,7 +742,7 @@
     {
       "type": "Microsoft.Compute/virtualMachines/extensions",
       "name": "[concat(parameters('vmName'),'/initdevbox')]",
-      "apiVersion": "2017-03-30",
+      "apiVersion": "2015-06-15",
       "location": "[parameters('primaryLocation')]",
       "dependsOn": [
         "[concat('Microsoft.Compute/virtualMachines/', parameters('vmName'))]"
@@ -746,7 +750,7 @@
       "properties": {
         "publisher": "Microsoft.OSTCExtensions",
         "type": "CustomScriptForLinux",
-        "typeHandlerVersion": "1.5",
+        "typeHandlerVersion": "1.4",
         "settings": {
           "fileUris": "[variables('filesToDownload')]",
           "enableInternalDNSCheck": false,

@@ -3,13 +3,13 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "existingVirtualNetworkName": {
-            "value": "GEN-VNET-NAME"
+            "value": "GET-PREREQ-virtualNetwork"
         },
-        "existingVirtualNetworkResourceGroup": {  
-            "value": "GEN-VNET-RESOURCEGROUP-NAME" 
-        }, 
+        "existingVirtualNetworkResourceGroup": {
+            "value": "GET-PREREQ-rgName"
+        },
         "subnetName": {
-            "value": "GEN-VNET-SUBNET1-NAME"
+            "value": "GET-PREREQ-subnet"
         },
         "osDiskVhdUri": {
             "value": "GEN-SPECIALIZED-WINVHD-URI"

@@ -9,7 +9,7 @@
       "value": "GEN-UNIQUE-13"
     },
     "adminUsername": {
-      "value": "GEN-UNIQUE"
+      "value": "vmAdminName"
     },
     "adminPassword": {
       "value": "GEN-PASSWORD"

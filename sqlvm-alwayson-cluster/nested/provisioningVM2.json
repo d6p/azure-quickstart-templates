@@ -93,38 +93,31 @@
       "type": "string"
     }
   },
-  "variables": { 
+  "variables": {
+    "sqlstorageName": "[parameters('sqlStorageAccountName')]",
+    "dcstorageName": "[parameters('dcStorageAccountName')]",
+    "fwstorageName": "[concat(uniquestring(parameters('sqlStorageAccountName')), 'fsw')]",
     "diagstorageName": "[concat(uniquestring(parameters('sqlStorageAccountName')), 'diag')]"
   },
   "resources": [
     {
       "type": "Microsoft.Compute/availabilitySets",
       "name": "[parameters('adAvailabilitySetName')]",
-      "apiVersion": "2017-12-01",
-      "location": "[parameters('location')]",
-      "sku": {
-        "name": "Aligned"
-        },
-        "properties": { 
-        "platformFaultDomainCount": 2,
-        "platformUpdateDomainCount": 5
-        }
+      "apiVersion": "2015-06-15",
+      "location": "[parameters('location')]"
     },
     {
       "type": "Microsoft.Compute/availabilitySets",
       "name": "[parameters('sqlAvailabilitySetName')]",
-      "apiVersion": "2017-12-01",
+      "apiVersion": "2015-06-15",
       "location": "[parameters('location')]",
-      "sku": {
-        "name": "Aligned"
-        },
       "properties": {
         "platformFaultDomainCount": 3,
         "platformUpdateDomainCount": 3
       }
     },
     {
-      "apiVersion": "2017-03-30",
+      "apiVersion": "2015-06-15",
       "type": "Microsoft.Compute/virtualMachines",
       "name": "[parameters('adPDCVMName')]",
       "location": "[parameters('location')]",
@@ -151,12 +144,18 @@
             "version": "latest"
           },
           "osDisk": {
-            "name":  "[concat(parameters('adPDCVMName'),'_OSDisk')]",
+            "name": "osdisk",
+            "vhd": {
+              "uri": "[concat('http://',variables('dcstorageName'),'.blob.core.windows.net/',parameters('vmContainerName'),'/',parameters('adPDCVMName'),'-osdisk.vhd')]"
+            },
             "caching": "ReadWrite",
             "createOption": "FromImage"
           },
           "dataDisks": [
             {
+              "vhd": {
+                "uri": "[concat('http://',variables('dcstorageName'),'.blob.core.windows.net/',parameters('vmContainerName'),'/', parameters('adPDCVMName'),'data-1.vhd')]"
+              },
               "name": "[concat(parameters('adPDCVMName'),'-data-disk1')]",
               "createOption": "Empty",
               "caching": "None",
@@ -174,7 +173,7 @@
         },
         "diagnosticsProfile": {
           "bootDiagnostics": {
-            "enabled": true,
+            "enabled": "true",
             "storageUri": "[concat('http://',variables('diagstorageName'),'.blob.core.windows.net')]"
           }
         }
@@ -214,7 +213,7 @@
       ]
     },
     {
-      "apiVersion": "2017-03-30",
+      "apiVersion": "2015-06-15",
       "type": "Microsoft.Compute/virtualMachines",
       "name": "[parameters('adBDCVMName')]",
       "location": "[parameters('location')]",
@@ -242,11 +241,17 @@
           },
           "osDisk": {
             "name": "osdisk",
+            "vhd": {
+              "uri": "[concat('http://',variables('dcstorageName'),'.blob.core.windows.net/',parameters('vmContainerName'),'/',parameters('adBDCVMName'),'-osdisk.vhd')]"
+            },
             "caching": "ReadWrite",
             "createOption": "FromImage"
           },
           "dataDisks": [
             {
+              "vhd": {
+                "uri": "[concat('http://',variables('dcstorageName'),'.blob.core.windows.net/',parameters('vmContainerName'),'/', parameters('adBDCVMName'),'data-1.vhd')]"
+              },
               "name": "[concat(parameters('adBDCVMName'),'-data-disk1')]",
               "createOption": "Empty",
               "caching": "None",
@@ -264,14 +269,14 @@
         },
         "diagnosticsProfile": {
           "bootDiagnostics": {
-            "enabled": true,
+            "enabled": "true",
             "storageUri": "[concat('http://',variables('diagstorageName'),'.blob.core.windows.net')]"
           }
         }
       }
     },
     {
-      "apiVersion": "2017-03-30",
+      "apiVersion": "2015-06-15",
       "type": "Microsoft.Compute/virtualMachines",
       "name": "[concat(parameters('sqlVMName'), copyindex())]",
       "location": "[parameters('location')]",
@@ -302,12 +307,18 @@
             "version": "latest"
           },
           "osDisk": {
-            "name": "[concat(parameters('sqlVMName'), copyindex(),'_OSDisk')]",
+            "name": "osdisk",
+            "vhd": {
+              "uri": "[concat('http://',variables('sqlstorageName'),'.blob.core.windows.net/',parameters('vmContainerName'),'/',parameters('sqlVMName'), copyindex(), '-osdisk.vhd')]"
+            },
             "caching": "ReadWrite",
             "createOption": "FromImage"
           },
           "dataDisks": [
             {
+              "vhd": {
+                "uri": "[concat('http://',variables('sqlstorageName'),'.blob.core.windows.net/',parameters('vmContainerName'),'/', parameters('sqlVMName'), copyindex(), '-Data-1.vhd')]"
+              },
               "name": "[concat(parameters('sqlVMName'), copyindex(),'-data-disk1')]",
               "caching": "None",
               "createOption": "Empty",
@@ -315,6 +326,9 @@
               "lun": 0
             },
             {
+              "vhd": {
+                "uri": "[concat('http://',variables('sqlstorageName'),'.blob.core.windows.net/',parameters('vmContainerName'),'/', parameters('sqlVMName'), copyindex(), '-Data-2.vhd')]"
+              },
               "name": "[concat(parameters('sqlVMName'), copyindex(),'-data-disk2')]",
               "caching": "None",
               "createOption": "Empty",
@@ -332,14 +346,14 @@
         },
         "diagnosticsProfile": {
           "bootDiagnostics": {
-            "enabled":  true ,
+            "enabled": "true",
             "storageUri": "[concat('http://',variables('diagstorageName'),'.blob.core.windows.net')]"
           }
         }
       }
     },
     {
-      "apiVersion": "2017-03-30",
+      "apiVersion": "2015-06-15",
       "type": "Microsoft.Compute/virtualMachines",
       "name": "[parameters('sqlwVMName')]",
       "location": "[parameters('location')]",
@@ -366,12 +380,18 @@
             "version": "latest"
           },
           "osDisk": {
-            "name": "[concat(parameters('sqlwVMName'),'_OSDisk1')]",
+            "name": "osdisk",
+            "vhd": {
+              "uri": "[concat('http://',variables('fwstorageName'),'.blob.core.windows.net/',parameters('vmContainerName'),'/',parameters('sqlwVMName'),'-osdisk.vhd')]"
+            },
             "caching": "ReadWrite",
             "createOption": "FromImage"
           },
           "dataDisks": [
-            { 
+            {
+              "vhd": {
+                "uri": "[concat('http://',variables('fwstorageName'),'.blob.core.windows.net/',parameters('vmContainerName'),'/',parameters('sqlwVMName'),'-data-1.vhd')]"
+              },
               "name": "[concat(parameters('sqlwVMName'),'-data-disk1')]",
               "caching": "None",
               "createOption": "Empty",

@@ -55,7 +55,9 @@
     "securityGroupRef": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('securityGroupName'))]",
     "ipOctet01": "[parameters('machineSettings').staticIps.ipOctet01]",
     "ipOctet2": "[parameters('machineSettings').staticIps.ipOctet2]",
-    "ipOctet3": "[parameters('machineSettings').staticIps.ipOctet3]" 
+    "ipOctet3": "[parameters('machineSettings').staticIps.ipOctet3]",
+    "storageReferencePrefix": "[concat('Microsoft.Storage/storageAccounts/', parameters('storageSettings').name)]",
+    "storageApiVersion": "2016-01-01"
   },
   "resources": [
     {
@@ -92,7 +94,7 @@
       }
     },
     {
-      "apiVersion": "2017-03-30", 
+      "apiVersion": "2015-06-15",
       "type": "Microsoft.Compute/virtualMachines",
       "name": "[concat(variables('vmName'), copyindex())]",
       "tags": {
@@ -126,22 +128,31 @@
         "storageProfile": {
           "imageReference": "[parameters('osSettings').imageReference]",
           "osDisk": {
-            "name": "[concat(variables('vmName'), copyindex(),'_OSDisk')]", 
+            "name": "osdisk",
+            "vhd": {
+              "uri": "[concat(reference(concat(variables('storageReferencePrefix'), parameters('storageSettings').map[copyindex()]), variables('storageApiVersion')).primaryEndpoints.blob, 'vhds/', variables('vmName'), copyindex(), '-osdisk.vhd')]"
+            },
             "caching": "ReadWrite",
             "createOption": "FromImage"
           },
           "dataDisks": [
             {
-              "name": "[concat(variables('vmName'), copyindex(),'_DataDisk1')]", 
+              "name": "datadisk1",
               "diskSizeGB": "[parameters('machineSettings').diskSize]",
-              "lun": 0,              
+              "lun": 0,
+              "vhd": {
+                "uri": "[concat(reference(concat(variables('storageReferencePrefix'), parameters('storageSettings').map[copyindex()]), variables('storageApiVersion')).primaryEndpoints.blob, 'vhds/', variables('vmName'), copyindex(), '-datadisk1.vhd')]"
+              },
               "caching": "ReadOnly",
               "createOption": "Empty"
             },
             {
-              "name": "[concat(variables('vmName'), copyindex(),'_DataDisk2')]", 
+              "name": "datadisk2",
               "diskSizeGB": "[parameters('machineSettings').diskSize]",
-              "lun": 1,             
+              "lun": 1,
+              "vhd": {
+                "uri": "[concat(reference(concat(variables('storageReferencePrefix'), parameters('storageSettings').map[copyindex()]), variables('storageApiVersion')).primaryEndpoints.blob, 'vhds/', variables('vmName'), copyindex(), '-datadisk2.vhd')]"
+              },
               "caching": "ReadOnly",
               "createOption": "Empty"
             }

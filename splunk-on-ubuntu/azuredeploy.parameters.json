@@ -42,7 +42,7 @@
       "value": "Standard_LRS"
     },
     "adminUsername": {
-      "value": "GEN-UNIQUE"
+      "value": "splunker"
     },
     "adminPassword": {
       "value": "GEN-PASSWORD"

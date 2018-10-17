@@ -9,6 +9,12 @@
         "description": "The private DNS suffix and zone name."
       }
     },
+    "newStorageAccountName": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of the new storage account created to store the VMs disks"
+      }
+    },
     "adminUsername": {
       "type": "string",
       "metadata": {
@@ -50,30 +56,43 @@
     "adPDCVMName": "adPDC",
     "adBDCVMName": "adBDC",
     "subnetId": "[concat(resourceId('Microsoft.Network/virtualNetworks', variables('virtualNetworkName')),'/subnets/',variables('subnetName'))]",
+    "storageId": "[resourceId(resourceGroup().name, 'Microsoft.Storage/storageAccounts', parameters('newStorageAccountName'))]",
     "serverTemplateFolder": "nested/server",
     "serverTemplateFile": "setupserver.json",
     "vmTemplate": "[concat(parameters('assetLocation'), '/nested/genericvm.json')]",
     "winClientTemplateFolder": "nested/windows-client",
     "linClientTemplateFolder": "nested/linux-client",
     "winClientTemplateFile": "setupwinclient.json",
-    "linClientTemplateFile": "setuplinuxclient.json",
-    "bdcRDPPort": 13389,
-    "pdcRDPPort": 3389,
-      "_artifactsLocationSasToken": ""
+    "linClientTemplateFile": "setuplinuxclient.json"
   },
   "resources": [
     {
       "comments": "This uses one of the other templates to deploy a pair of AD controllers",
       "name": "adDeployment",
       "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2016-09-01",
+      "apiVersion": "2016-06-01",
       "properties": {
         "mode": "Incremental",
         "templateLink": {
           "uri": "[variables('adTemplate')]",
           "contentVersion": "1.0.0.0"
         },
-        "parameters": {    
+        "parameters": {
+          "newStorageAccountName": {
+            "value": "[parameters('newStorageAccountName')]"
+          },
+          "storageAccountType": {
+            "value": "Standard_LRS"
+          },
+          "virtualNetworkName": {
+            "value": "[variables('virtualNetworkName')]"
+          },
+          "adSubnetName": {
+            "value": "[variables('subnetName')]"
+          },
+          "adVMSize": {
+            "value": "Standard_D1"
+          },
           "domainName": {
             "value": "[parameters('dnsZoneName')]"
           },
@@ -86,20 +105,11 @@
           "dnsPrefix": {
             "value": "[parameters('serverPublicDnsName')]"
           },
-          "pdcRDPPort": {
-            "value":"[variables('pdcRDPPort')]"
+          "adPDCVMName": {
+            "value": "[variables('adPDCVMName')]"
           },
-          "bdcRDPPort": {
-            "value":"[variables('bdcRDPPort')]"
-          },
-          "_artifactsLocation": {
-            "value": "parameters('assetLocation')"
-          },
-          "_artifactsLocationSasToken": {
-            "value":"[variables('_artifactsLocationSasToken')]"
-          },
-          "location": {
-            "value":"[parameters('location')]"
+          "adBDCVMName": {
+            "value": "[variables('adBDCVMName')]"
           }
         }
       }
@@ -111,7 +121,7 @@
       "dependsOn": [
         "Microsoft.Resources/deployments/adDeployment"
       ],
-      "apiVersion": "2016-09-01",
+      "apiVersion": "2016-06-01",
       "properties": {
         "mode": "Incremental",
         "templateLink": {
@@ -141,7 +151,7 @@
       "comments": "Create an example Windows client VM",
       "name": "setupWindowsClient",
       "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2016-09-01",
+      "apiVersion": "2016-06-01",
       "dependsOn": [
         "Microsoft.Resources/deployments/setupServer"
       ],
@@ -172,6 +182,9 @@
           },
           "imageSKU": {
             "value": "2012-R2-Datacenter"
+          },
+          "storageId": {
+            "value": "[variables('storageId')]"
           }
         }
       }
@@ -183,7 +196,7 @@
       "dependsOn": [
         "Microsoft.Resources/deployments/setupWindowsClient"
       ],
-      "apiVersion":"2016-09-01",
+      "apiVersion": "2016-06-01",
       "properties": {
         "mode": "Incremental",
         "templateLink": {
@@ -210,7 +223,7 @@
       "comments": "Create an example Ubuntu client VM",
       "name": "setupLinuxClient",
       "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2016-09-01",
+      "apiVersion": "2016-06-01",
       "dependsOn": [
         "Microsoft.Resources/deployments/setupServer"
       ],
@@ -241,6 +254,9 @@
           },
           "imageSKU": {
             "value": "14.04.5-LTS"
+          },
+          "storageId": {
+            "value": "[variables('storageId')]"
           }
         }
       }
@@ -252,7 +268,7 @@
       "dependsOn": [
         "Microsoft.Resources/deployments/setupLinuxClient"
       ],
-      "apiVersion": "2016-09-01",
+      "apiVersion": "2016-06-01",
       "properties": {
         "mode": "Incremental",
         "templateLink": {

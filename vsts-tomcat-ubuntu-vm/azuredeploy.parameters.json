@@ -3,22 +3,22 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "adminUsername": {
-      "value": "GEN-USER"
+      "value": "tcdeploy"
     },
     "adminPassword": {
-      "value": "GEN-PASSWORD"
+      "value": ""
     },
     "dnsLabelPrefix": {
       "value": "default"
     },
     "tomcatUserName": {
-      "value": "GEN-USER"
+      "value": "tcmanager"
     },
     "tomcatPassword": {
-      "value": "GEN-PASSWORD"
+      "value": ""
     },
     "sshPassPhrase": {
-      "value": "GEN-UNIQUE"
+      "value": ""
     }
   }
 }

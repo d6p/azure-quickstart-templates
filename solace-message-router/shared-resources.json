@@ -4,16 +4,16 @@
   "parameters": {
     "securityGroupName": {
       "type": "string",
-      "defaultValue": "solace-security",
+      "defaultValue": "vmr-security",
       "metadata": {
-        "description": "Security group defined to support PubSub+ message broker system level and default message vpn ports."
+        "description": "Security group defined to support VMR default message vpn ports"
       }
     },
     "subnetPrefix": {
       "type": "string",
       "defaultValue": "10.0.0.0/24",
       "metadata": {
-        "description": "Subnet for PubSub+ message brokers."
+        "description": "Subnet for VMRS"
       }
     },
     "location": {
@@ -73,7 +73,7 @@
             }
           },
           {
-            "name": "ssh_host",
+            "name": "ssh",
             "properties": {
               "priority": 200,
               "sourceAddressPrefix": "*",
@@ -86,61 +86,9 @@
             }
           },
           {
-            "name": "ssh",
+            "name": "web",
             "properties": {
               "priority": 201,
-              "sourceAddressPrefix": "*",
-              "protocol": "Tcp",
-              "destinationPortRange": "2222",
-              "access": "Allow",
-              "direction": "Inbound",
-              "sourcePortRange": "*",
-              "destinationAddressPrefix": "*"
-            }
-          },
-          {
-            "name": "semp",
-            "properties": {
-              "priority": 202,
-              "sourceAddressPrefix": "*",
-              "protocol": "Tcp",
-              "destinationPortRange": "8080",
-              "access": "Allow",
-              "direction": "Inbound",
-              "sourcePortRange": "*",
-              "destinationAddressPrefix": "*"
-            }
-          },
-          {
-            "name": "smf",
-            "properties": {
-              "priority": 203,
-              "sourceAddressPrefix": "*",
-              "protocol": "Tcp",
-              "destinationPortRange": "55555",
-              "access": "Allow",
-              "direction": "Inbound",
-              "sourcePortRange": "*",
-              "destinationAddressPrefix": "*"
-            }
-          },
-          {
-            "name": "smf_compressed",
-            "properties": {
-              "priority": 204,
-              "sourceAddressPrefix": "*",
-              "protocol": "Tcp",
-              "destinationPortRange": "55003",
-              "access": "Allow",
-              "direction": "Inbound",
-              "sourcePortRange": "*",
-              "destinationAddressPrefix": "*"
-            }
-          },
-          {
-            "name": "smf_web",
-            "properties": {
-              "priority": 205,
               "sourceAddressPrefix": "*",
               "protocol": "Tcp",
               "destinationPortRange": "80",
@@ -153,7 +101,7 @@
           {
             "name": "mqtt",
             "properties": {
-              "priority": 206,
+              "priority": 202,
               "sourceAddressPrefix": "*",
               "protocol": "Tcp",
               "destinationPortRange": "1883",
@@ -164,9 +112,9 @@
             }
           },
           {
-            "name": "mqtt_web",
+            "name": "mqtt_ws",
             "properties": {
-              "priority": 207,
+              "priority": 203,
               "sourceAddressPrefix": "*",
               "protocol": "Tcp",
               "destinationPortRange": "8000",
@@ -177,12 +125,12 @@
             }
           },
           {
-            "name": "amqp",
+            "name": "semp",
             "properties": {
-              "priority": 208,
+              "priority": 204,
               "sourceAddressPrefix": "*",
               "protocol": "Tcp",
-              "destinationPortRange": "5672",
+              "destinationPortRange": "8080",
               "access": "Allow",
               "direction": "Inbound",
               "sourcePortRange": "*",
@@ -192,10 +140,36 @@
           {
             "name": "rest",
             "properties": {
-              "priority": 209,
+              "priority": 205,
               "sourceAddressPrefix": "*",
               "protocol": "Tcp",
               "destinationPortRange": "9000",
+              "access": "Allow",
+              "direction": "Inbound",
+              "sourcePortRange": "*",
+              "destinationAddressPrefix": "*"
+            }
+          },
+          {
+            "name": "smf_compressed",
+            "properties": {
+              "priority": 206,
+              "sourceAddressPrefix": "*",
+              "protocol": "Tcp",
+              "destinationPortRange": "55003",
+              "access": "Allow",
+              "direction": "Inbound",
+              "sourcePortRange": "*",
+              "destinationAddressPrefix": "*"
+            }
+          },
+          {
+            "name": "smf",
+            "properties": {
+              "priority": 207,
+              "sourceAddressPrefix": "*",
+              "protocol": "Tcp",
+              "destinationPortRange": "55555",
               "access": "Allow",
               "direction": "Inbound",
               "sourcePortRange": "*",
