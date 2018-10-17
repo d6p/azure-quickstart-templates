@@ -9,7 +9,7 @@
 
 ## <a name="archi"></a>Architecture
 
-![How the Evidian SafeKit farm cluster implements load balancing and failover in Azure?](https://www.evidian.com/safekit/images/azure-farm-cluster-load-balancing-cluster.png)
+![How the Evidian SafeKit farm cluster implements load balancing and failover in Azure?](images/farmarch.png)
 
 On the previous figure,
 
