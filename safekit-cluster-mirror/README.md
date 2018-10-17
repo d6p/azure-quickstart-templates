@@ -9,7 +9,7 @@
 
 ## <a name="archi"></a>Architecture
 
-![How the Evidian SafeKit mirror cluster implements real-time replication and failover in Azure?](https://www.evidian.com/safekit/images/azure-block-level-file-level-software-data-replication-mirror-cluster.png)
+![How the Evidian SafeKit mirror cluster implements real-time replication and failover in Azure?](images/mirrorarch.png)
 
 On the previous figure,
 
