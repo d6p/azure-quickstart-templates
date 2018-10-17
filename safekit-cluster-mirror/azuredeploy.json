@@ -225,27 +225,6 @@
 							},
 							"1": {
 								"position": {
-									"x": 2,
-									"y": 0,
-									"colSpan": 1,
-									"rowSpan": 1
-								},
-								"metadata": {
-									"inputs": [
-										{
-											"name": "id",
-											"value": "[resourceId(resourceGroup().name,'Microsoft.Network/publicIPAddresses','pipVM1')]"
-										}
-									],
-									"type": "Extension/Microsoft_Azure_Network/PartType/PublicIpAddressPart",
-									"asset": {
-										"idInputName": "id",
-										"type": "PublicIpAddress"
-									}
-								}
-							},
-							"2": {
-								"position": {
 									"x": 4,
 									"y": 0,
 									"colSpan": 2,
@@ -266,28 +245,7 @@
 									"defaultMenuItemId": "overview"
 								}
 							},
-							"3": {
-								"position": {
-									"x": 6,
-									"y": 0,
-									"colSpan": 2,
-									"rowSpan": 2
-								},
-								"metadata": {
-									"inputs": [
-										{
-											"name": "id",
-											"value": "[resourceId(resourceGroup().name,'Microsoft.Network/publicIPAddresses',concat('pip',resourceGroup().name,'vip'))]"
-										}
-									],
-									"type": "Extension/Microsoft_Azure_Network/PartType/PublicIpAddressPart",
-									"asset": {
-										"idInputName": "id",
-										"type": "PublicIpAddress"
-									}
-								}
-							},
-							"4": {
+							"2": {
 								"position": {
 									"x": 0,
 									"y": 1,
@@ -309,28 +267,7 @@
 									"defaultMenuItemId": "overview"
 								}
 							},
-							"5": {
-								"position": {
-									"x": 2,
-									"y": 1,
-									"colSpan": 1,
-									"rowSpan": 1
-								},
-								"metadata": {
-									"inputs": [
-										{
-											"name": "id",
-											"value": "[resourceId(resourceGroup().name,'Microsoft.Network/publicIPAddresses','pipVM2')]"
-										}
-									],
-									"type": "Extension/Microsoft_Azure_Network/PartType/PublicIpAddressPart",
-									"asset": {
-										"idInputName": "id",
-										"type": "PublicIpAddress"
-									}
-								}
-							},
-							"6": {
+							"3": {
 								"position": {
 									"x": 0,
 									"y": 3,
@@ -345,15 +282,15 @@
 									"settings": {
 										"content": {
 											"settings": {
-												"content": "[concat('__Usage__\n\n\nGet the credentials by following <a href=\"',reference('safekitCluster').outputs['Credentials Url'].value,'\" target=\"_blank\">this link</a>.\n\nConnect to the <a href=\"',reference('safekitCluster').outputs['Console Url'].value,'?proxy=true\" target=\"_blank\">SafeKit Console</a>\n\nConnect to the <a href=\"',reference('safekitCluster').outputs['Mosaic URL'].value,'\" target=\"_blank\">test url</a>\n__Architecture__<br><br><img src=\"https://www.evidian.com/safekit/images/farm-cluster-azure-load-balancing-cluster.jpg\" width=\"400\"></img><br>')]",
-												"title": "SafeKit Mirror cluster",
-												"subtitle": "2 machines with safekit installed and a mirror AM running"
+												"content": "[concat('__Usage__\n\n\nRetrieve credentials (client certificate&key and CA certificate) from <a href=\"',reference('safekitCluster').outputs['Credentials Url'].value,'\" target=\"_blank\">here</a>.\n(To log in: User: "CA_admin", Password: "<the password you entered at deployment time>")\n\nConnect to the <a href=\"',reference('safekitCluster').outputs['Console Url'].value,'?proxy=true\" target=\"_blank\">SafeKit Web  Console</a>\n\nConnect to the <a href=\"',reference('safekitCluster').outputs['Mosaic URL'].value,'\" target=\"_blank\">Test Url (mosaic)</a>\n')]",
+												"title": "SafeKit Mirror Cluster",
+												"subtitle": "2 SafeKit nodes running a mirror AM"
 											}
 										}
 									}
 								}
 							},
-							"7": {
+							"4": {
 								"position": {
 									"x": 4,
 									"y": 3,
@@ -370,9 +307,7 @@
 												"services": "",
 												"resourceGroupId": "all",
 												"timeSpan": "5",
-												"startTime": "2018-10-12T13:04:52.182Z",
-												"endTime": "2018-10-15T13:04:52.182Z",
-												"queryName": "my region",
+												"queryName": "resources region",
 												"queryId": "a48a947d-fe36-4450-bd0f-0bb93012f387",
 												"loadFromCache": false,
 												"communicationType": "incident",
