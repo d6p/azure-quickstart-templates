@@ -28,15 +28,15 @@ On the previous figure,
 
 In term of VMs, this template deploys:
 
-*   from 2 to 4 VMs (Windows or Linux)
+*   from 2 to 4 VMs (Windows or Linux) spanning 2 or 3 availability zone(s)
 *   each VM has a public IP address
 *   the SafeKit free trial is installed in all VMs
 *   a SafeKit farm module is configured in all VMs
 
 In term of load balancer, this template deploys:
 
-*   a public load balancer
-*   a public IP is associated with the public load balancer and plays the role of the virtual IP
+*   a public load balancer (standard SKU)
+*   a public IP (Standard SKU) is associated with the public load balancer and plays the role of the virtual IP
 *   alls VMs are in the backend pool of the load balancer
 *   a health probe checks the farm module state on all VMs
 *   a load balancing rule for external port 9453 / internal port 9453 is set to test the load balanced virtual IP
@@ -45,7 +45,7 @@ In term of load balancer, this template deploys:
 
 Click the "Deploy to Azure" button at the beginning of this document to deploy the load balancing cluster.
 
-After deployment, go to the output panel and:
+After deployment, go to the resource group's 'Microsoft.Template' deployment output panel (Home > Resource Groups > YourResourceGroup - Deployments) and:
 
 *   visit the credential url to install the client and CA certificates in your web browser
 *   after certificates installation, start the web console of the cluster
