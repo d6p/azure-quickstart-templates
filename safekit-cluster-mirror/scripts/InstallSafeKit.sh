@@ -16,6 +16,10 @@ curl https://packages.microsoft.com/config/rhel/7/prod.repo | sudo tee /etc/yum.
 yum update powershell
 # Install PowerShell
 yum install -y powershell
+
+mkdir /replicated
+echo "This is a replicated file" >/replicated/repfile.txt
+
 if [ -f "installAzureRM.ps1" ]; then 
 	pwsh ./installAzureRM.ps1 -linux
 fi

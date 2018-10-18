@@ -34,6 +34,10 @@ $arglist = @(
 )
 
 Start-Process msiexec.exe -ArgumentList $arglist -Wait
+
+mkdir "c:/replicated"
+"This is a replicated file" > c:/replicated/repfile.txt
+
 Log "Install Azure RM"
 
 if(Test-Path -Path "./installAzureRm.ps1") {
