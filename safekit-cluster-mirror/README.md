@@ -30,15 +30,15 @@ On the previous figure,
 
 In term of VMs, this template deploys:
 
-*   2 VMs (Windows or Linux)
+*   2 VMs (Windows or Linux) spanning 2 availability zones
 *   each VM has a public IP address
 *   the SafeKit free trial is installed in both VMs
 *   a SafeKit mirror module is configured in both VMs
 
 In term of load balancer, this template deploys:
 
-*   a public load balancer
-*   a public IP is associated with the public load balancer and plays the role of the virtual IP
+*   a public load balancer (standard SKU)
+*   a public IP (Standard SKU) is associated with the public load balancer and plays the role of the virtual IP
 *   both VMs are in the backend pool of the load balancer
 *   a health probe checks the mirror module state on both VMs
 *   a load balancing rule for external port 9453 / internal port 9453 is set to test the primary/secondary virtual IP
@@ -47,7 +47,7 @@ In term of load balancer, this template deploys:
 
 Click the "Deploy to Azure" button at the beginning of this document to deploy the high availability cluster.
 
-After deployment, go to the output panel and:
+After deployment, go to the resource groups's deployment ('Microsoft.Template') output panel and:
 
 *   visit the credential url to install the client and CA certificates in your web browser
 *   after certificates installation, start the web console of the cluster
