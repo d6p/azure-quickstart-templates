@@ -5,7 +5,7 @@
   "description": "A SafeKit Cluster with a farm module configured,  running CentOS or Windows Server 2016, with a loadbalanced VIP",
   "summary": "Example of SafeKit farm cluster in Azure",
   "githubUsername": "d6p",
-  "dateUpdated": "2018-10-10"
+  "dateUpdated": "2018-10-19"
 }
 
 
