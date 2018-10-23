@@ -209,7 +209,7 @@
 		},
 		"START THE CONSOLE": {
 			"type": "string",
-			"value": "[reference('safekitCluster').outputs['Console Url'].value]"
+			"value": "[concat(reference('safekitCluster').outputs['Console Url'].value,'?firewallDialog=false')]"
 		},
 		"TEST THE VIRTUAL IP": {
 			"type": "string",
@@ -219,7 +219,7 @@
 			"type": "string",
 			"value": "[variables('adminUserName')]"
 		},
-		"FQDN": {
+		"VM1": {
 			"type": "string",
 			"value": "[reference('safekitCluster').outputs.fqdn.value]"
 		}
