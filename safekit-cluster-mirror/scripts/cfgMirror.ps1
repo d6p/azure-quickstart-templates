@@ -35,7 +35,7 @@ if ($MName){
 	$res = & $safekitcmd -H "*" -E $MName
 	Log "$MName => $res"
 	& $safekitcmd prim -m $MName
-	& $safekitcmd -H "*" start -m $MName
+	& $safekitcmd -H "VM2" start -m $MName
 }
 
 Log "end of script"
