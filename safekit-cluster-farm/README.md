@@ -43,7 +43,7 @@ In term of load balancer, this template deploys:
 
 ## <a name="use"></a>How to use
 
-Click the "Deploy to Azure" button at the beginning of this document to deploy the load balancing cluster.
+Click the "Deploy to Azure" button at the beginning of this document to deploy the load balancing cluster. Please create a new resource group.
 
 After deployment, go to the resource group's 'Microsoft.Template' deployment output panel (Home > Resource Groups > YourResourceGroup - Deployments) and:
 
