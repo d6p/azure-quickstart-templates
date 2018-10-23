@@ -45,7 +45,7 @@ In term of load balancer, this template deploys:
 
 ## <a name="use"></a>How to use
 
-Click the "Deploy to Azure" button at the beginning of this document to deploy the high availability cluster.
+Click the "Deploy to Azure" button at the beginning of this document to deploy the high availability cluster. Please create a new resource group.
 
 After deployment, go to the resource groups's deployment ('Microsoft.Template') output panel and:
 
