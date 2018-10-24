@@ -29,7 +29,7 @@ On the previous figure,
 In term of VMs, this template deploys:
 
 *   from 2 to 4 VMs (Windows or Linux) spanning 2 or 3 availability zone(s)
-*   each VM has a public IP address
+*   each VM has a public IP address (Standard SKU)
 *   the SafeKit free trial is installed in all VMs
 *   a SafeKit farm module is configured in all VMs
 
